@@ -1092,6 +1092,37 @@
     }
 }
 /* ... kode CSS sebelumnya ... */
+        /* --- Tambahkan CSS ini --- */
+
+/* Kontainer untuk GIF mobile */
+.hero-gif-mobile {
+    display: none; /* Sembunyikan secara default */
+    width: 200px; /* Ukuran GIF di mobile */
+    height: 200px;
+    margin: 0 auto 20px; /* Tengahkan dan beri jarak bawah */
+    border-radius: 50%; /* Agar tetap bulat */
+    overflow: hidden; /* Pastikan bagian luar tidak kelihatan */
+    box-shadow: 0 0 20px rgba(108, 99, 255, 0.3); /* Tambahkan sedikit bayangan jika diinginkan */
+}
+
+/* Tampilkan GIF mobile hanya di layar kecil */
+@media (max-width: 768px) {
+    .hero-gif-mobile {
+        display: block; /* Tampilkan GIF */
+    }
+
+    /* Sembunyikan gambar GIF lama (yg di .hero-image) di mobile */
+    .hero-image img {
+        display: none;
+    }
+
+    /* Atau jika sebelumnya menggunakan embed script dan sudah diganti ke img, maka: */
+    .hero-image {
+        display: none; /* Pastikan div lama juga disembunyikan */
+    }
+}
+
+/* --- Akhir tambahan CSS --- */
     </style>
     <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
 </head>
@@ -1100,6 +1131,14 @@
     <div class="parallax-layer"></div>
     <div class="parallax-layer"></div>
 
+    <!-- Hero Section -->
+<section class="hero" id="home">
+    <div class="container">
+        <!-- --- Tambahkan elemen ini --- -->
+        <div class="hero-gif-mobile">
+            <img src="https://media.tenor.com/hXg8C5HJn18AAAAM/nyan-cat-cat.gif" alt="Nyan Cat" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        </div>
+        <!-- --- Akhir tambahan elemen --- -->
     <!-- Header -->
     <header id="header">
         <div class="container">
@@ -1617,4 +1656,5 @@ window.addEventListener('load', setupPaperPlaneInteraction);
     <div id="particles-js"></div>
 </body>
 </html>
+
 

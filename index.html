@@ -810,8 +810,15 @@
                 margin: 0 auto;
             }
             .hero-image {
-                display: none; /* Sembunyikan GIF di mobile untuk fokus ke teks */
-            }
+        width: 200px;
+        height: 200px;
+        top: auto;
+        bottom: 20px;
+        right: 50%;
+        transform: translateX(50%);
+        position: relative;
+    }
+}
             .hero h1 {
                 font-size: 2.8rem;
             }
@@ -1436,5 +1443,6 @@ window.addEventListener('load', setupPaperPlaneInteraction);
     <div id="particles-js"></div>
 </body>
 </html>
+
 
 

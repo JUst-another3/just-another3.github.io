@@ -447,21 +447,6 @@
             margin-bottom: 15px;
             color: white;
         }
-        .skill-bar {
-            width: 100%;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            margin: 20px 0;
-            overflow: hidden;
-        }
-        .skill-progress {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            border-radius: 4px;
-            transition: width 1.5s ease-out;
-            width: 0%;
-        }
         /* Experience Section */
         .timeline {
             position: relative;
@@ -1054,51 +1039,28 @@
                         <i class="fas fa-star"></i>
                     </div>
                     <h3>Mobile Gaming (Honor of Kings)</h3>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-level="85%"></div>
-                    </div>
-                    <p>85% proficiency</p>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">
                         <i class="fas fa-star"></i>
                     </div>
                     <h3>Basic Tool Repair & Maintenance</h3>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-level="70%"></div>
-                    </div>
-                    <p>70% proficiency</p>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">
                         <i class="fas fa-star"></i>
                     </div>
                     <h3>Sustainability & Cardboard Recycling</h3>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-level="75%"></div>
-                    </div>
-                    <p>75% proficiency</p>
-                </div>
                 <div class="skill-card">
                     <div class="skill-icon">
                         <i class="fas fa-star"></i>
                     </div>
                     <h3>Microsoft Office Suite</h3>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-level="60%"></div>
-                    </div>
-                    <p>60% proficiency</p>
-                </div>
                 <div class="skill-card">
                     <div class="skill-icon">
                         <i class="fas fa-star"></i>
                     </div>
                     <h3>Canva Design & Content Creation</h3>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-level="65%"></div>
-                    </div>
-                    <p>65% proficiency</p>
-                </div>
             </div>
         </div>
     </section>
@@ -1331,13 +1293,7 @@ window.addEventListener('load', setupPaperPlaneInteraction);
             }
             type();
         }
-        // Animate skill bars
-        function animateSkillBars() {
-            const skillBars = document.querySelectorAll('.skill-progress');
-            skillBars.forEach(bar => {
-                const level = bar.getAttribute('data-level');
-                bar.style.width = level;
-            });
+      
         }
         // Intersection Observer untuk animasi scroll-triggered
         const observerOptions = {
@@ -1348,9 +1304,6 @@ window.addEventListener('load', setupPaperPlaneInteraction);
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('animate__animated', 'animate__fadeInUp');
-                    if (entry.target.classList.contains('skills-container')) {
-                        setTimeout(animateSkillBars, 300);
-                    }
                     if (entry.target.classList.contains('timeline')) {
                         const timelineItems = entry.target.querySelectorAll('.timeline-content');
                         timelineItems.forEach((item, index) => {
@@ -1416,11 +1369,8 @@ window.addEventListener('load', setupPaperPlaneInteraction);
         // Update year in copyright
         document.querySelector('.copyright').innerHTML = `© ${new Date().getFullYear()} Naytaka Eka Putra. All rights reserved.`;
         // Initial animations after page load
-        window.addEventListener('load', function() {
-            // Trigger initial animations
-            document.querySelectorAll('.skill-progress').forEach(bar => {
-                bar.style.width = '0';
-            });
+        window.addEventListener('load', function()
+            );
             // Start animations after a short delay
             setTimeout(() => {
                 document.querySelectorAll('.skill-card').forEach(card => {
@@ -1441,6 +1391,7 @@ window.addEventListener('load', setupPaperPlaneInteraction);
     <div id="particles-js"></div>
 </body>
 </html>
+
 
 
 

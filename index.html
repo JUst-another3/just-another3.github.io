@@ -791,6 +791,7 @@
             }
             .hero-content {
                 margin: 0 auto;
+                margin-bottom: 220px;
             }
             .hero-image {
         width: 200px;
@@ -799,7 +800,7 @@
         bottom: 20px;
         right: 50%;
         transform: translateX(50%);
-        position: relative;
+        position: absolute;
     }
 }
             .hero h1 {
@@ -947,6 +948,25 @@
     section {
         padding: 70px 0; /* Gunakan padding dari aturan section sebelumnya */
     }
+}
+
+        /* Pastikan hero-image tetap di kanan pada desktop */
+.hero-image {
+  position: absolute !important;
+  right: 5% !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+/* Untuk mobile */
+@media (max-width: 768px) {
+  .hero-image {
+    right: 50% !important;
+    left: auto !important;
+    top: auto !important;
+    bottom: 20px !important;
+    transform: translateX(50%) !important;
+  }
 }
 /* ... kode CSS sebelumnya ... */
     </style>
@@ -1391,6 +1411,7 @@ window.addEventListener('load', setupPaperPlaneInteraction);
     <div id="particles-js"></div>
 </body>
 </html>
+
 
 
 

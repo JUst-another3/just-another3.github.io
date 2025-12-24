@@ -188,10 +188,6 @@
 }
 /* ... kode CSS .hero h1 sebelumnya ... */
 /* Responsif: Ukuran font Hero */
-@media (max-width: 768px) {
-    .hero h1 {
-        font-size: 2.8rem; /* Atau ukuran yang Anda rasa pas */
-    }
 }
 @media (max-width: 576px) {
     .hero h1 {
@@ -312,6 +308,68 @@
 }
 /* Responsif: Padding Section */
 @media (max-width: 768px) {
+    .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(26, 26, 46, 0.95);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                gap: 15px;
+                backdrop-filter: blur(10px);
+            }
+            .nav-links.show {
+                display: flex;
+            }
+            .mobile-toggle {
+                display: block;
+            }
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 150px 0 100px;
+            }
+            .hero-content {
+                order: 1;
+                margin: 0 auto;
+                max-width: 400px;
+    }
+            .hero-image {
+        display: flex;
+        width: 250px;
+        height: 250px;
+        margin: 0 auto 30px;
+        margin-bottom: 200px;
+        order: 0;
+        top: auto;
+        bottom: auto;
+        right: auto;
+        transform: none;
+        position: static;
+    }
+}
+            .hero h1 {
+                font-size: 2.5rem;
+                text-align: center;
+            }
+            .hero p{
+                text-align: center;
+            }
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            .personal-info {
+                grid-template-columns: 1fr;
+            }
+            /* --- Tambahkan aturan ini --- */
+            .footer-content .social-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px; /* Tambahkan sedikit jarak antar ikon di mobile */
+            }
     section {
         padding: 60px 0; /* Lebih kecil di tablet dan mobile */
     }
@@ -765,71 +823,6 @@
                 left: -10px;
             }
         }
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: rgba(26, 26, 46, 0.95);
-                flex-direction: column;
-                align-items: center;
-                padding: 20px 0;
-                gap: 15px;
-                backdrop-filter: blur(10px);
-            }
-            .nav-links.show {
-                display: flex;
-            }
-            .mobile-toggle {
-                display: block;
-            }
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                padding: 150px 0 100px;
-            }
-            .hero-content {
-                order: 1;
-                margin: 0 auto;
-                max-width: 400px;
-    }
-            .hero-image {
-        display: flex;
-        width: 250px;
-        height: 250px;
-        margin: 0 auto 30px;
-        margin-bottom: 200px;
-        order: 0;
-        top: auto;
-        bottom: auto;
-        right: auto;
-        transform: none;
-        position: static;
-    }
-}
-            .hero h1 {
-                font-size: 2.5rem;
-                text-align: center;
-            }
-            .hero p{
-                text-align: center;
-            }
-            .section-title h2 {
-                font-size: 2rem;
-            }
-            .personal-info {
-                grid-template-columns: 1fr;
-            }
-            /* --- Tambahkan aturan ini --- */
-            .footer-content .social-links {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 10px; /* Tambahkan sedikit jarak antar ikon di mobile */
-            }
-            /* --- Akhir tambahan --- */
-        }
         @media (max-width: 576px) {
             .hero h1 {
                 font-size: 2.3rem;
@@ -898,50 +891,6 @@
         left: -10px;
     }
 }
-@media (max-width: 768px) {
-    .nav-links {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: rgba(26, 26, 46, 0.95);
-        flex-direction: column;
-        align-items: center;
-        padding: 20px 0;
-        gap: 15px;
-        backdrop-filter: blur(10px);
-    }
-    .nav-links.show {
-        display: flex;
-    }
-    .mobile-toggle {
-        display: block;
-    }
-    .hero {
-        text-align: center;
-        padding: 150px 0 100px;
-    }
-    .hero-content {
-        margin: 0 auto;
-    }
-    .hero h1 {
-        font-size: 2.8rem;
-    }
-    .section-title h2 {
-        font-size: 2rem;
-    }
-    .personal-info {
-        grid-template-columns: 1fr;
-    }
-    /* --- Tambahkan aturan ini --- */
-    .footer-content .social-links {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px; /* Tambahkan sedikit jarak antar ikon di mobile */
-    }
-    /* --- Akhir tambahan --- */
-}
 @media (max-width: 576px) {
     .hero h1 {
         font-size: 2.3rem;
@@ -955,25 +904,6 @@
     section {
         padding: 70px 0; /* Gunakan padding dari aturan section sebelumnya */
     }
-}
-
-        /* Pastikan hero-image tetap di kanan pada desktop */
-.hero-image {
-  position: absolute !important;
-  right: 5% !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-}
-
-/* Untuk mobile */
-@media (max-width: 768px) {
-  .hero-image {
-    right: 50% !important;
-    left: auto !important;
-    top: auto !important;
-    bottom: 20px !important;
-    transform: translateX(50%) !important;
-  }
 }
 /* ... kode CSS sebelumnya ... */
     </style>
@@ -1076,19 +1006,19 @@
                 <div class="skill-card">
                     <div class="skill-icon">
                         <i class="fas fa-star"></i>
+                        <h3>Sustainability & Cardboard Recycling</h3>
                     </div>
-                    <h3>Sustainability & Cardboard Recycling</h3>
                 <div class="skill-card">
                     <div class="skill-icon">
                         <i class="fas fa-star"></i>
-                    </div>
                     <h3>Microsoft Office Suite</h3>
+                    </div>
                 <div class="skill-card">
                     <div class="skill-icon">
-                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i> 
+                        <h3>Canva Design & Content Creation</h3>
                     </div>
-                    <h3>Canva Design & Content Creation</h3>
-            </div>
+                </div>
         </div>
     </section>
     <!-- Experience Section -->
@@ -1418,6 +1348,7 @@ window.addEventListener('load', setupPaperPlaneInteraction);
     <div id="particles-js"></div>
 </body>
 </html>
+
 
 
 

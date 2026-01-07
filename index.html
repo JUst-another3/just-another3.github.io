@@ -14,7 +14,7 @@
     <style> /* ===== VERSI MOBILE (HP) - Mobile First Approach ===== */
 /* Semua style dasar untuk perangkat kecil */
 
-/*(Variabel global untuk konsistensi warna dan efek di seluruh situs)*/
+/*Variabel global untuk konsistensi warna dan efek di seluruh situs*/
 :root {
     --primary: #6C63FF;
     --secondary: #4A44E0;
@@ -27,14 +27,14 @@
     --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/*(Reset dasar browser untuk konsistensi tampilan di semua perangkat)*/
+/*Reset dasar browser untuk konsistensi tampilan di semua perangkat)*/
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/*(Pengaturan tubuh utama - font, latar belakang, dan scroll control untuk mobile)*/
+/*Pengaturan tubuh utama - font, latar belakang, dan scroll control untuk mobile)*/
 body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
@@ -43,9 +43,8 @@ body {
     overflow-x: hidden;
     position: relative;
     background-attachment: scroll; /* Background tidak ikut scroll di mobile */
-}
 
-/*(Lapisan dekoratif radial gradient di latar belakang - terlihat di semua perangkat)*/
+/*Lapisan dekoratif radial gradient di latar belakang - terlihat di semua perangkat)*/
 body::before {
     content: '';
     position: fixed;
@@ -58,7 +57,7 @@ body::before {
     z-index: -1;
 }
 
-/*(Kontainer pusat untuk semua konten dengan padding responsif untuk mobile)*/
+/*Kontainer pusat untuk semua konten dengan padding responsif untuk mobile)*/
 .container {
     width: 100%;
     max-width: 1200px;
@@ -66,7 +65,7 @@ body::before {
     padding: 0 20px;
 }
 
-/*(Header tetap di atas dengan efek transparansi untuk mobile)*/
+/*Header tetap di atas dengan efek transparansi untuk mobile)*/
 header {
     position: fixed;
     top: 0;
@@ -78,14 +77,14 @@ header {
     backdrop-filter: blur(10px); /* Efek blur transparan pada header */
 }
 
-/*(Efek header saat discroll - background solid dan shadow di mobile)*/
+/*Efek header saat discroll - background solid dan shadow di mobile)*/
 header.scrolled {
     background: rgba(26, 26, 46, 0.9);
     padding: 15px 0;
     box-shadow: var(--shadow);
 }
 
-/*(Layout navigasi mobile - logo di kiri, icon menu di kanan)*/
+/*Layout navigasi mobile - logo di kiri, icon menu di kanan)*/
 nav {
     display: flex;
     justify-content: space-between;

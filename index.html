@@ -11,10 +11,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Animate CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <style>/* ===========================================
-   VERSI 1: DESKTOP (PC/LAPTOP) - Lebar > 768px
-   =========================================== */
-/* Semua styling default adalah untuk desktop */
+    <style/* ===== VERSI MOBILE (HP) - Mobile First Approach ===== */
+/* Semua style dasar untuk perangkat kecil */
+
+/*(Variabel global untuk konsistensi warna dan efek di seluruh situs)*/
 :root {
     --primary: #6C63FF;
     --secondary: #4A44E0;
@@ -27,12 +27,14 @@
     --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+/*(Reset dasar browser untuk konsistensi tampilan di semua perangkat)*/
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/*(Pengaturan tubuh utama - font, latar belakang, dan scroll control untuk mobile)*/
 body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
@@ -40,9 +42,10 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     position: relative;
-    background-attachment: fixed;
+    background-attachment: scroll; /* Background tidak ikut scroll di mobile */
 }
 
+/*(Lapisan dekoratif radial gradient di latar belakang - terlihat di semua perangkat)*/
 body::before {
     content: '';
     position: fixed;
@@ -55,6 +58,7 @@ body::before {
     z-index: -1;
 }
 
+/*(Kontainer pusat untuk semua konten dengan padding responsif untuk mobile)*/
 .container {
     width: 100%;
     max-width: 1200px;
@@ -62,7 +66,7 @@ body::before {
     padding: 0 20px;
 }
 
-/* Header & Navigation - Desktop */
+/*(Header tetap di atas dengan efek transparansi untuk mobile)*/
 header {
     position: fixed;
     top: 0;
@@ -71,21 +75,24 @@ header {
     z-index: 1000;
     padding: 20px 0;
     transition: var(--transition);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px); /* Efek blur transparan pada header */
 }
 
+/*(Efek header saat discroll - background solid dan shadow di mobile)*/
 header.scrolled {
     background: rgba(26, 26, 46, 0.9);
     padding: 15px 0;
     box-shadow: var(--shadow);
 }
 
+/*(Layout navigasi mobile - logo di kiri, icon menu di kanan)*/
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+/*(Styling logo dengan animasi pulse untuk mobile)*/
 .logo {
     font-family: 'Montserrat', sans-serif;
     font-size: 1.8rem;
@@ -96,673 +103,305 @@ nav {
     animation: pulse 2s infinite;
 }
 
-.logo::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transition: var(--transition);
-    transform-origin: left;
+/*(Animasi pulse untuk logo - efek berkedip halus di mobile)*/
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
 }
 
-.logo:hover::after {
-    transform: scaleX(1);
-}
-
-.nav-links {
-    display: flex;
-    gap: 30px;
-}
-
-.nav-links a {
-    color: var(--light);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1rem;
-    position: relative;
-    padding: 5px 0;
-    transition: var(--transition);
-}
-
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--primary);
-    transition: var(--transition);
-}
-
-.nav-links a:hover {
-    color: var(--primary);
-}
-
-.nav-links a:hover::after {
-    width: 100%;
-}
-
+/*(Toggle button untuk mobile menu - terlihat hanya di perangkat kecil)*/
 .mobile-toggle {
-    display: none; /* Sembunyikan tombol mobile di desktop */
+    display: block; /* Terlihat di mobile */
+    background: none;
+    border: none;
+    color: var(--light);
+    font-size: 1.5rem;
+    cursor: pointer;
 }
 
-/* Hero Section - Desktop */
+/*(Menu navigasi mobile - disembunyikan secara default, muncul saat toggle diklik)*/
+.nav-links {
+    display: none; /* Disembunyikan di mobile secara default */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(26, 26, 46, 0.95);
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    gap: 15px;
+    backdrop-filter: blur(10px);
+}
+
+/*(Menu navigasi mobile - muncul saat toggle diklik)*/
+.nav-links.show {
+    display: flex;
+}
+
+/*(Hero section untuk mobile - tampilan penuh layar dengan konten di tengah)*/
 .hero {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 120px 0 80px;
+    padding: 150px 0 100px; /* Padding lebih besar di mobile untuk ruang header */
     position: relative;
     overflow: hidden;
+    text-align: center; /* Teks di tengah untuk mobile */
 }
 
-.hero::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(108, 99, 255, 0.1) 0%, transparent 70%);
-    z-index: -1;
-    animation: rotate 20s linear infinite;
-}
-
+/*(Konten teks di hero section untuk mobile - di tengah layar)*/
 .hero-content {
-    max-width: 600px;
-    animation: fadeInUp 1s ease-out;
+    max-width: 100%; /* Lebar penuh di mobile */
+    margin: 0 auto; /* Posisi tengah */
 }
 
+/*(Judul utama untuk mobile - ukuran lebih kecil agar muat di layar kecil)*/
 .hero h1 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 4rem;
+    font-size: 2.8rem; /* Ukuran lebih kecil untuk mobile */
     font-weight: 800;
     line-height: 1.2;
     margin-bottom: 20px;
     color: #6C63FF;
     position: relative;
-    opacity: 0;
-    animation: fadeInUp 1s ease-out 0.5s forwards;
 }
 
-.hero h1 span {
-    display: inline-block;
-    color: #FF6584;
-    animation: wave 2s infinite;
-}
-
-.hero h1::after {
-    content: '';
-    position: absolute;
-    bottom: 10px;
-    left: 0;
-    width: 80px;
-    height: 4px;
-    background: var(--accent);
-    border-radius: 2px;
-    animation: drawLine 1s ease-out 1.5s forwards;
-    transform: scaleX(0);
-    transform-origin: left;
-}
-
+/*(Paragraf deskripsi di hero section untuk mobile - ukuran font lebih kecil)*/
 .hero p {
-    font-size: 1.2rem;
+    font-size: 1rem; /* Ukuran lebih kecil untuk mobile */
     color: rgba(255, 255, 255, 0.85);
     margin-bottom: 30px;
-    max-width: 500px;
-    opacity: 0;
-    animation: fadeInUp 1s ease-out 1s forwards;
+    max-width: 100%; /* Lebar penuh di mobile */
 }
 
-.cta-button {
-    display: inline-block;
-    padding: 15px 40px;
-    background: linear-gradient(45deg, var(--primary), var(--secondary));
-    color: white;
-    text-decoration: none;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: var(--transition);
-    box-shadow: var(--shadow);
-    border: none;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    opacity: 0;
-    animation: fadeInUp 1s ease-out 1.5s forwards;
-}
-
-.cta-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: var(--transition);
-}
-
-.cta-button:hover::before {
-    left: 100%;
-}
-
-.cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(108, 99, 255, 0.4);
-}
-
+/*(Gambar Nyan Cat untuk mobile - posisi di tengah bawah layar)*/
 .hero-image {
     position: absolute;
-    right: 5%;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 400px;
-    height: 400px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px; /* Di bagian bawah layar */
+    width: 200px; /* Ukuran lebih kecil untuk mobile */
+    height: 200px;
     border-radius: 50%;
-    box-shadow: 0 0 50px rgba(108, 99, 255, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
-    animation: float 6s ease-in-out infinite;
-    opacity: 0;
-    animation: fadeInRight 1s ease-out 2s forwards;
-    overflow: hidden; /* Pastikan konten tidak keluar dari lingkaran */
+    z-index: 1;
 }
 
-.hero-image::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    /* HAPUS backdrop-filter: blur(10px) agar gambar tidak buram */
-}
-
-/* Section Styling - Desktop */
+/*(Pengaturan section umum untuk mobile - padding lebih kecil)*/
 section {
-    padding: 80px 0;
+    padding: 60px 0; /* Padding lebih kecil untuk mobile */
     position: relative;
 }
 
-.section-title {
-    text-align: center;
-    margin-bottom: 60px;
-}
-
+/*(Judul section untuk mobile - ukuran font lebih kecil)*/
 .section-title h2 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 15px;
-    background: linear-gradient(45deg, var(--primary), var(--accent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    opacity: 0;
-    animation: fadeInUp 1s ease-out 0.3s forwards;
+    font-size: 2rem; /* Ukuran lebih kecil untuk mobile */
 }
 
-.section-title p {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 1.1rem;
-    max-width: 600px;
-    margin: 0 auto;
-    opacity: 0;
-    animation: fadeInUp 1s ease-out 0.6s forwards;
-}
-
-/* About Section - Desktop */
+/*(About section untuk mobile - layout satu kolom)*/
 .about-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
-    align-items: center;
-}
-
-.about-text {
-    animation: fadeInLeft 1s ease-out 0.5s forwards;
-    opacity: 0;
-}
-
-.about-text h3 {
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-    color: var(--primary);
-}
-
-.about-text p {
-    margin-bottom: 20px;
-    color: rgba(255, 255, 255, 0.85);
-}
-
-.personal-info {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-}
-
-.info-item {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 20px;
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(108, 99, 255, 0.2);
-    transition: var(--transition);
-    opacity: 0;
-    animation: fadeInUp 0.8s ease-out forwards;
-    animation-delay: 0.7s;
-}
-
-.info-item:nth-child(2) { animation-delay: 0.9s; }
-.info-item:nth-child(3) { animation-delay: 1.1s; }
-.info-item:nth-child(4) { animation-delay: 1.3s; }
-
-.info-item:hover {
-    transform: translateY(-5px);
-    border-color: var(--primary);
-    background: rgba(108, 99, 255, 0.1);
-}
-
-.info-item i {
-    color: var(--primary);
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    display: block;
-}
-
-.info-item h4 {
-    font-size: 1rem;
-    color: var(--primary);
-    margin-bottom: 5px;
-}
-
-.info-item p {
-    color: rgba(255, 255, 255, 0.85);
-    margin: 0;
-}
-
-/* Skills Section - Desktop */
-.skills-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: 1fr; /* Satu kolom di mobile */
     gap: 30px;
 }
 
-.skill-card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 30px;
-    text-align: center;
-    transition: var(--transition);
-    border: 1px solid rgba(108, 99, 255, 0.2);
-    position: relative;
-    overflow: hidden;
-    opacity: 0;
-    transform: translateY(30px);
-    animation: slideInUp 1s ease-out forwards;
-}
-
-.skill-card:nth-child(1) { animation-delay: 0.2s; }
-.skill-card:nth-child(2) { animation-delay: 0.4s; }
-.skill-card:nth-child(3) { animation-delay: 0.6s; }
-.skill-card:nth-child(4) { animation-delay: 0.8s; }
-.skill-card:nth-child(5) { animation-delay: 1.0s; }
-
-.skill-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background: linear-gradient(90deg, var(--primary), var(--accent));
-}
-
-.skill-card:hover {
-    transform: translateY(-10px);
-    box-shadow: var(--shadow);
-    border-color: var(--primary);
-}
-
-.skill-icon {
-    font-size: 3rem;
-    color: var(--primary);
-    margin-bottom: 20px;
-}
-
-.skill-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    color: white;
-}
-
-.skill-bar {
-    width: 100%;
-    height: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-    margin: 20px 0;
-    overflow: hidden;
-}
-
-.skill-progress {
-    height: 100%;
-    background: linear-gradient(90deg, var(--primary), var(--accent));
-    border-radius: 4px;
-    transition: width 1.5s ease-out;
-    width: 0%;
-}
-
-/* Experience Section - Desktop */
-.timeline {
-    position: relative;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.timeline::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 0;
-    width: 4px;
-    height: 100%;
-    background: var(--primary);
-    transform: translateX(-50%);
-}
-
-.timeline-item {
-    position: relative;
-    width: 50%;
-    padding: 20px 40px;
-}
-
-.timeline-item:nth-child(odd) {
-    left: 0;
-}
-
-.timeline-item:nth-child(even) {
-    left: 50%;
-}
-
-.timeline-content {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 30px;
-    position: relative;
-    border: 1px solid rgba(108, 99, 255, 0.2);
-    transition: var(--transition);
-    opacity: 0;
-    transform: translateX(50px);
-    animation: slideInLeft 1s ease-out forwards;
-}
-
-.timeline-item:nth-child(even) .timeline-content {
-    transform: translateX(-50px);
-    animation: slideInRight 1s ease-out forwards;
-}
-
-.timeline-item:nth-child(odd) .timeline-content {
-    animation-delay: 0.5s;
-}
-
-.timeline-item:nth-child(even) .timeline-content {
-    animation-delay: 0.5s;
-}
-
-.timeline-content:hover {
-    transform: translateX(0);
-    border-color: var(--primary);
-    background: rgba(108, 99, 255, 0.1);
-}
-
-.timeline-item:nth-child(even) .timeline-content:hover {
-    transform: translateX(0);
-}
-
-.timeline-content::before {
-    content: '';
-    position: absolute;
-    top: 20px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--primary);
-}
-
-.timeline-item:nth-child(odd) .timeline-content::before {
-    right: -10px;
-}
-
-.timeline-item:nth-child(even) .timeline-content::before {
-    left: -10px;
-}
-
-.timeline-content h3 {
-    font-size: 1.3rem;
-    color: var(--primary);
-    margin-bottom: 10px;
-}
-
-.timeline-content .role {
-    font-weight: 600;
-    color: white;
-    margin-bottom: 5px;
-}
-
-.timeline-content .period {
-    color: var(--accent);
-    font-weight: 500;
-    margin-bottom: 15px;
-    display: block;
-}
-
-.timeline-content p {
-    color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 0;
-}
-
-/* Contact Section - Desktop */
-.contact-container {
+/*(Info personal untuk mobile - layout satu kolom)*/
+.personal-info {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
+    grid-template-columns: 1fr; /* Satu kolom di mobile */
+    gap: 20px;
 }
 
-.contact-info {
-    display: flex;
-    flex-direction: column;
+/*(Skills section untuk mobile - grid responsif dengan minimal lebar 280px)*/
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsif di mobile */
     gap: 25px;
 }
 
-.contact-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-    animation: fadeInLeft 1s ease-out 0.5s forwards;
-    opacity: 0;
+/*(Timeline untuk mobile - garis vertikal di kiri, bukan di tengah)*/
+.timeline::before {
+    left: 31px; /* Posisi garis di kiri untuk mobile */
 }
 
-.contact-icon {
-    min-width: 60px;
-    height: 60px;
-    background: rgba(108, 99, 255, 0.15);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    color: var(--primary);
-    transition: var(--transition);
+/*(Item timeline untuk mobile - semua di satu sisi, bukan zigzag)*/
+.timeline-item {
+    width: 100%;
+    padding-left: 70px;
+    padding-right: 25px;
+    left: 0 !important; /* Semua item di kiri untuk mobile */
 }
 
-.contact-item:hover .contact-icon {
-    transform: scale(1.2);
-    background: rgba(108, 99, 255, 0.3);
-    animation: rotateIcon 0.6s ease-in-out;
+/*(Konten timeline untuk mobile - semua di kiri)*/
+.timeline-content::before {
+    left: -10px !important; /* Titik di kiri untuk semua item */
 }
 
-.contact-details h3 {
-    font-size: 1.2rem;
-    margin-bottom: 5px;
-    color: white;
+/*(Contact section untuk mobile - layout satu kolom)*/
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr; /* Satu kolom di mobile */
+    gap: 30px;
 }
 
-.contact-details p, .contact-details a {
-    color: rgba(255, 255, 255, 0.85);
-    text-decoration: none;
-    transition: var(--transition);
-}
-
-.contact-details a:hover {
-    color: var(--primary);
-}
-
-.social-links {
-    display: flex;
-    gap: 15px;
-    margin-top: 10px;
-}
-
-.social-links a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--primary);
-    font-size: 1.2rem;
-    transition: var(--transition);
-    border: 1px solid rgba(108, 99, 255, 0.3);
-}
-
-.social-links a:hover {
-    background: var(--primary);
-    color: white;
-    transform: translateY(-3px);
-}
-
-.social-links a i {
-    color: #6C63FF;
-}
-
-.social-links a:hover i {
-    color: #FF6584;
-}
-
-/* Footer - Desktop */
+/*(Footer untuk mobile - teks di tengah dan ikon sosial media rapi di tengah)*/
 footer {
-    background: rgba(13, 13, 23, 0.95);
-    padding: 50px 0 20px;
     text-align: center;
-    border-top: 1px solid rgba(108, 99, 255, 0.3);
+    padding: 40px 0 20px;
 }
 
-.footer-content {
-    max-width: 600px;
-    margin: 0 auto;
+.footer-content .social-links {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.footer-logo {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2rem;
-    font-weight: 800;
-    color: var(--primary);
-    margin-bottom: 20px;
-    display: inline-block;
-    animation: pulse 2s infinite;
-}
+/* ===== VERSI DESKTOP (PC) - Media Query untuk Layar Besar ===== */
+/* Hanya aktif untuk layar dengan lebar minimal 769px */
 
-.copyright {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.9rem;
-    margin-top: 20px;
-}
-
-/* Animasi Tambahan - Desktop */
-.contact-form i.fas.fa-paper-plane {
-    font-size: 3rem;
-    color: var(--primary);
-    margin-bottom: 20px;
-    transition: transform 0.4s ease;
-    cursor: pointer;
-}
-
-.contact-form i.fas.fa-paper-plane.clicked {
-    animation: bounce 0.5s ease;
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
+@media (min-width: 769px) {
+    /*(Header desktop - padding lebih besar dan efek parallax background)*/
+    body {
+        background-attachment: fixed; /* Background tetap saat scroll di desktop */
     }
-    40% {
-        transform: translateY(-20px);
+    
+    /*(Header desktop - padding lebih besar)*/
+    header {
+        padding: 20px 0;
     }
-    60% {
-        transform: translateY(-10px);
+    
+    /*(Navigasi desktop - toggle button disembunyikan, menu muncul horizontal)*/
+    .mobile-toggle {
+        display: none; /* Sembunyikan toggle button di desktop */
+    }
+    
+    .nav-links {
+        display: flex !important; /* Menu selalu terlihat di desktop */
+        position: static;
+        background: transparent;
+        width: auto;
+        flex-direction: row;
+        padding: 0;
+        gap: 30px;
+        backdrop-filter: none;
+    }
+    
+    /*(Hero section desktop - padding lebih besar, konten di kiri)*/
+    .hero {
+        padding: 120px 0 80px;
+        text-align: left; /* Teks di kiri untuk desktop */
+    }
+    
+    /*(Konten teks di hero section desktop - di kiri layar)*/
+    .hero-content {
+        max-width: 600px;
+        margin: 0; /* Tidak perlu margin auto di desktop */
+    }
+    
+    /*(Judul utama untuk desktop - ukuran lebih besar)*/
+    .hero h1 {
+        font-size: 4rem; /* Ukuran lebih besar untuk desktop */
+    }
+    
+    /*(Paragraf deskripsi di hero section desktop - ukuran font lebih besar)*/
+    .hero p {
+        font-size: 1.2rem; /* Ukuran lebih besar untuk desktop */
+        max-width: 500px;
+    }
+    
+    /*(Gambar Nyan Cat untuk desktop - posisi di kanan tengah layar)*/
+    .hero-image {
+        top: 50%; /* Posisi vertikal di tengah */
+        transform: translateY(-50%); /* Centering vertikal */
+        right: 5%; /* Di sebelah kanan layar */
+        left: auto; /* Reset posisi kiri */
+        bottom: auto; /* Reset posisi bawah */
+        width: 400px; /* Ukuran lebih besar untuk desktop */
+        height: 400px;
+        box-shadow: 0 0 50px rgba(108, 99, 255, 0.5);
+        animation: float 6s ease-in-out infinite; /* Animasi melayang di desktop */
+    }
+    
+    /*(Animasi melayang untuk gambar hero di desktop - naik turun halus)*/
+    @keyframes float {
+        0%, 100% { transform: translateY(-50%) translateX(0); }
+        50% { transform: translateY(-55%) translateX(5px); }
+    }
+    
+    /*(Pengaturan section umum untuk desktop - padding lebih besar)*/
+    section {
+        padding: 80px 0; /* Padding lebih besar untuk desktop */
+    }
+    
+    /*(Judul section untuk desktop - ukuran font lebih besar)*/
+    .section-title h2 {
+        font-size: 2.5rem; /* Ukuran lebih besar untuk desktop */
+    }
+    
+    /*(About section untuk desktop - layout dua kolom)*/
+    .about-content {
+        grid-template-columns: 1fr 1fr; /* Dua kolom di desktop */
+        gap: 50px;
+    }
+    
+    /*(Info personal untuk desktop - layout dua kolom)*/
+    .personal-info {
+        grid-template-columns: repeat(2, 1fr); /* Dua kolom di desktop */
+    }
+    
+    /*(Skills section untuk desktop - grid dengan kolom lebih banyak)*/
+    .skills-container {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Lebar kartu lebih besar */
+        gap: 30px;
+    }
+    
+    /*(Timeline untuk desktop - garis vertikal di tengah, layout zigzag)*/
+    .timeline::before {
+        left: 50%; /* Garis di tengah untuk desktop */
+        transform: translateX(-50%);
+    }
+    
+    /*(Item timeline untuk desktop - posisi zigzag kiri-kanan)*/
+    .timeline-item {
+        width: 50%;
+        padding: 20px 40px;
+    }
+    
+    .timeline-item:nth-child(odd) {
+        left: 0; /* Item ganjil di kiri */
+    }
+    
+    .timeline-item:nth-child(even) {
+        left: 50%; /* Item genap di kanan */
+    }
+    
+    /*(Titik timeline untuk desktop - posisi sesuai sisi item)*/
+    .timeline-item:nth-child(odd) .timeline-content::before {
+        right: -10px; /* Titik di kanan untuk item kiri */
+    }
+    
+    .timeline-item:nth-child(even) .timeline-content::before {
+        left: -10px; /* Titik di kiri untuk item kanan */
+    }
+    
+    /*(Contact section untuk desktop - layout dua kolom)*/
+    .contact-container {
+        grid-template-columns: 1fr 1fr; /* Dua kolom di desktop */
+        gap: 50px;
+    }
+    
+    /*(Footer untuk desktop - layout tetap di tengah tapi dengan padding lebih besar)*/
+    footer {
+        padding: 50px 0 20px;
     }
 }
 
-.social-links a:hover i {
-    animation: rotateIcon 0.6s ease-in-out;
-}
-
-@keyframes rotateIcon {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* Animasi Dasar */
+/*(Animasi dasar yang digunakan di kedua versi - fade in, slide in, dll)*/
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes fadeInRight {
-    from {
-        opacity: 0;
-        transform: translateX(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideInUp {
     from {
         opacity: 0;
         transform: translateY(30px);
@@ -792,161 +431,6 @@ footer {
     to {
         opacity: 1;
         transform: translateX(0);
-    }
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-@keyframes rotate {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@keyframes wave {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(5deg); }
-    75% { transform: rotate(-5deg); }
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(-50%) translateX(0); }
-    50% { transform: translateY(-55%) translateX(5px); }
-}
-
-@keyframes drawLine {
-    to { transform: scaleX(1); }
-}
-
-/* ===========================================
-   VERSI 2: MOBILE (HP/TABLET) - Lebar ≤ 768px
-   =========================================== */
-@media (max-width: 768px) {
-    /* Header & Navigation - Mobile */
-    .mobile-toggle {
-        display: block;
-        background: none;
-        border: none;
-        color: var(--light);
-        font-size: 1.5rem;
-        cursor: pointer;
-    }
-    
-    .nav-links {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: rgba(26, 26, 46, 0.95);
-        flex-direction: column;
-        align-items: center;
-        padding: 20px 0;
-        gap: 15px;
-        backdrop-filter: blur(10px);
-    }
-    
-    .nav-links.show {
-        display: flex;
-    }
-    
-    /* Background attachment - mobile */
-    body {
-        background-attachment: scroll;
-    }
-    
-    /* Hero Section - Mobile */
-    .hero {
-        text-align: center;
-        padding: 150px 0 220px; /* Tambahkan padding bawah untuk ruang Nyan Cat */
-        min-height: auto;
-    }
-    
-    .hero-content {
-        margin: 0 auto;
-    }
-    
-    .hero h1 {
-        font-size: 2.8rem;
-    }
-    
-    .hero p {
-        font-size: 1.1rem;
-    }
-    
-    /* TAMPILKAN Nyan Cat di tengah bawah untuk mobile */
-    .hero-image {
-        display: flex; /* Aktifkan kembali */
-        position: absolute;
-        right: auto; /* Hapus posisi kanan */
-        left: 50%; /* Pindah ke tengah horizontal */
-        top: auto; /* Hapus posisi atas */
-        bottom: 40px; /* Tempatkan di bawah */
-        transform: translateX(-50%); /* Pusatkan secara horizontal */
-        width: 240px; /* Perkecil ukuran */
-        height: 240px; /* Perkecil ukuran */
-        margin: 0 auto;
-        z-index: 1;
-        animation: none; /* Hapus animasi float untuk mobile */
-    }
-    
-    .hero-image::before {
-        width: 230px;
-        height: 230px;
-    }
-    
-    /* Section Styling - Mobile */
-    section {
-        padding: 60px 0;
-    }
-    
-    .section-title h2 {
-        font-size: 2rem;
-    }
-    
-    /* About Section - Mobile */
-    .about-content {
-        grid-template-columns: 1fr;
-    }
-    
-    .personal-info {
-        grid-template-columns: 1fr;
-    }
-    
-    /* Experience Section - Mobile */
-    .timeline::before {
-        left: 31px;
-    }
-    
-    .timeline-item {
-        width: 100%;
-        padding-left: 70px;
-        padding-right: 25px;
-    }
-    
-    .timeline-item:nth-child(odd),
-    .timeline-item:nth-child(even) {
-        left: 0;
-    }
-    
-    .timeline-content::before,
-    .timeline-item:nth-child(even) .timeline-content::before {
-        left: -10px;
-    }
-    
-    /* Contact Section - Mobile */
-    .contact-container {
-        grid-template-columns: 1fr;
-    }
-    
-    /* Footer - Mobile */
-    .footer-content .social-links {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
     }
 }
 </style>

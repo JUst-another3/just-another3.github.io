@@ -68,7 +68,7 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 1000;F
     padding: 20px 0;
     transition: var(--transition);
     backdrop-filter: blur(10px);
@@ -271,7 +271,7 @@ nav {
     align-items: center;
     justify-content: center;
     animation: float 6s ease-in-out infinite;
-    opacity: 0;
+    opacity: 10;
     animation: fadeInRight 1s ease-out 2s forwards;
     overflow: hidden; /* Pastikan konten tidak keluar dari lingkaran */
 }
@@ -282,7 +282,7 @@ nav {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0);
     /* HAPUS backdrop-filter: blur(10px) agar gambar tidak buram */
 }
 
@@ -890,12 +890,6 @@ footer {
         height: 240px; /* Perkecil ukuran */
         margin: 0 auto;
         z-index: 1;
-        animation: none; /* Hapus animasi float untuk mobile */
-    }
-    
-    .hero-image::before {
-        width: 230px;
-        height: 230px;
     }
     
     /* Section Styling - Mobile */
@@ -1382,7 +1376,7 @@ window.addEventListener('load', setupPaperPlaneInteraction);
                     document.querySelector('.hero h1').style.animation = 'fadeInUp 1s ease-out 0.5s forwards';
                     document.querySelector('.hero p').style.animation = 'fadeInUp 1s ease-out 1s forwards';
                     document.querySelector('.cta-button').style.animation = 'fadeInUp 1s ease-out 1.5s forwards';
-                    document.querySelector('.hero-image').style.animation = 'fadeInRight 1s ease-out 2s forwards';
+                    document.querySelector('.hero-image').style.animation = 'fadeInRight 0.4s ease-out 1.25s forwards';
                 }
             }, 100);
         });

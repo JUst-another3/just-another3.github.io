@@ -272,6 +272,7 @@ nav {
     justify-content: center;
     animation: float 6s ease-in-out infinite;
     opacity: 10;
+    animation: fadeInRight 1s ease-out 2s forwards;
     overflow: hidden; /* Pastikan konten tidak keluar dari lingkaran */
 }
 
@@ -889,6 +890,12 @@ footer {
         height: 240px; /* Perkecil ukuran */
         margin: 0 auto;
         z-index: 1;
+        animation: none; /* Hapus animasi float untuk mobile */
+    }
+    
+    .hero-image::before {
+        width: 230px;
+        height: 230px;
     }
     
     /* Section Styling - Mobile */

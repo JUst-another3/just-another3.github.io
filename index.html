@@ -32,7 +32,27 @@
     padding: 0;
     box-sizing: border-box;
 }
+        /*Tambahan animasi*/
+/*(Animasi scroll halus untuk seluruh halaman)*/
+html {
+    scroll-behavior: smooth;
+}
 
+/*(Margin atas untuk section target agar tidak tertutup header)*/
+#contact {
+    scroll-margin-top: 100px; /* Sesuaikan dengan tinggi header Anda */
+}
+
+/*(Efek animasi saat tiba di section contact)*/
+@keyframes fadeInContact {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#contact {
+    animation: fadeInContact 1s ease-out forwards;
+}
+               
 body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
@@ -590,8 +610,15 @@ section {
     gap: 20px;
     animation: fadeInLeft 1s ease-out 0.5s forwards;
     opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
+.contact-item.appear {
+    opacity: 1;
+    transform: translateY(0);
+}
+        
 .contact-icon {
     min-width: 60px;
     height: 60px;
@@ -1169,7 +1196,37 @@ footer {
     </footer>
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
+    <script>  //Buat animasi tombol "Lets Connect"
+        document.addEventListener('DOMContentLoaded', function() {
+    const ctaButton = document.querySelector('.cta-button');
+    const header = document.querySelector('header');
+    
+    ctaButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Dapatkan posisi target
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+            // Efek highlight pada header saat scroll
+            header.classList.add('scrolled');
+            
+            // Scroll dengan offset untuk menghindari header
+            const headerHeight = document.querySelector('header').offsetHeight;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+            // Kembalikan header ke kondisi normal setelah scroll
+            setTimeout(() => {
+                header.classList.remove('scrolled');
+            }, 2000);
+        }
+    });
+});
         // --- Bagian lain dari script Anda ---
 // Fungsi untuk interaksi klik dan drag pada ikon paper-plane
 function setupPaperPlaneInteraction() {

@@ -32,7 +32,173 @@
     padding: 0;
     box-sizing: border-box;
 }
+/* ===== CSS LENGKAP UNTUK SEMUA INTERAKSI JAVASCRIPT ===== */
 
+/* ===== 1. ANIMASI SMOOTH SCROLL SAAT KLIK "LET'S CONNECT" ===== */
+html {
+    scroll-behavior: smooth; /* Membuat scroll halus di seluruh halaman */
+}
+
+#contact {
+    scroll-margin-top: 100px; /* Memberi jarak dari header saat scroll */
+    animation: fadeInContact 1s ease-out forwards; /* Animasi saat tiba di contact section */
+}
+
+@keyframes fadeInContact {
+    from { 
+        opacity: 0; 
+        transform: translateY(30px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* ===== 2. STYLING UNTUK IKON PESAWAT KERTAS (DRAG & CLICK) ===== */
+.contact-form i.fas.fa-paper-plane {
+    font-size: 3rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+    transition: transform 0.4s ease;
+    cursor: grab; /* Ubah kursor menjadi tangan saat hover */
+    position: relative; /* Penting untuk posisi absolut saat drag */
+    z-index: 10; /* Pastikan di atas elemen lain */
+}
+
+.contact-form i.fas.fa-paper-plane:active {
+    cursor: grabbing; /* Ubah kursor saat sedang di-drag */
+}
+
+/* Animasi bounce saat diklik */
+.contact-form i.fas.fa-paper-plane.clicked {
+    animation: bounce 0.5s ease;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-20px);
+    }
+    60% {
+        transform: translateY(-10px);
+    }
+}
+
+/* ===== 3. HEADER SCROLL EFFECT ===== */
+header.scrolled {
+    background: rgba(26, 26, 46, 0.95) !important; /* Lebih transparan saat scroll */
+    backdrop-filter: blur(15px); /* Efek blur lebih kuat */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3); /* Bayangan lebih jelas */
+}
+
+/* ===== 4. NAVIGASI SMOOTH SCROLL ===== */
+.nav-links a.active {
+    color: var(--accent); /* Highlight link aktif */
+}
+
+.nav-links a.active::after {
+    width: 100%; /* Garis bawah penuh untuk link aktif */
+    background: var(--accent);
+}
+
+/* ===== 5. ANIMASI SECTION SAAT MUNCUL SAAT SCROLL ===== */
+.animate__fadeInUp {
+    animation-name: fadeInUp !important;
+    animation-duration: 0.8s !important;
+    animation-fill-mode: forwards !important;
+}
+
+/* ===== 6. CONTACT ITEMS DENGAN ANIMASI SCROLL ===== */
+.contact-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.contact-item.appear {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===== 7. MOBILE MENU TOGGLE ===== */
+.mobile-toggle:focus {
+    outline: none; /* Hilangkan outline default */
+    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.5); /* Fokus ring untuk aksesibilitas */
+}
+
+/* ===== 8. HOVER EFFECTS TAMBAHAN ===== */
+/* Efek hover pada semua tombol */
+.cta-button:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 20px 40px rgba(108, 99, 255, 0.5);
+}
+
+/* Efek saat hover pada ikon sosial */
+.social-links a:active {
+    transform: scale(0.95); /* Efek "ditekan" */
+}
+
+/* ===== 9. DRAG EFFECT VISUAL ===== */
+.dragging {
+    cursor: grabbing !important;
+    opacity: 0.9; /* Sedikit transparan saat di-drag */
+    z-index: 1000 !important; /* Pastikan di atas semua elemen */
+    box-shadow: 0 0 20px rgba(108, 99, 255, 0.8); /* Bayangan khusus saat drag */
+}
+
+/* ===== 10. ANIMASI LOADING SAAT HALAMAN DIMUAT ===== */
+.loading-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--dark);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.loading-animation.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading-spinner {
+    width: 80px;
+    height: 80px;
+    border: 5px solid rgba(255, 255, 255, 0.1);
+    border-top: 5px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ===== 11. RESPONSIVE INTERAKSI UNTUK MOBILE ===== */
+@media (max-width: 768px) {
+    /* Ukuran lebih besar untuk target touch */
+    .contact-form i.fas.fa-paper-plane {
+        font-size: 4rem;
+        touch-action: none; /* Mencegah default touch behavior */
+    }
+    
+    .mobile-toggle:active {
+        transform: scale(0.95);
+    }
+    
+    /* Animasi lebih lambat untuk mobile */
+    .ct
+    
 body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);

@@ -1115,6 +1115,82 @@ footer {
         gap: 10px;
     }
 }
+
+/* ===== ANIMASI SCROLL SECTION-BY-SECTION ===== */
+
+/* Hero Section - Initial state */
+.hero {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+/* Hero Section - Visible state */
+.hero.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+    
+/* About Section - Slide dari kiri */
+.about-section {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.about-section.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Skills Section - Fade in dari bawah dengan bounce */
+.skills-section {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.skills-section.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Experience Section - Slide dari kanan */
+.experience-section {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.experience-section.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Contact Section - Zoom in dari kecil */
+.contact-section {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.contact-section.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Timeline items dengan animasi berantai */
+.timeline-item.visible .timeline-content {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+}
+
+/* Skill cards dengan animasi berantai */
+.skill-card.visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+    
 </style>
 </head>
 <body>
@@ -1154,7 +1230,7 @@ footer {
     </div>
 </section>
     <!-- About Section -->
-    <section id="about">
+    <section id="about" class="about-section">
         <div class="container">
             <div class="section-title">
                 <h2>About Me</h2>
@@ -1193,7 +1269,7 @@ footer {
         </div>
     </section>
     <!-- Skills Section -->
-    <section id="skills" style="background: rgba(22, 33, 62, 0.7);">
+    <section id="skills" class="skills-section" style="background: rgba(22, 33, 62, 0.7);">
         <div class="container">
             <div class="section-title">
                 <h2>My Skills</h2>
@@ -1231,7 +1307,7 @@ footer {
         </div>
     </section>
     <!-- Experience Section -->
-    <section id="experience">
+    <section id="experience" class="experience-section">
         <div class="container">
             <div class="section-title">
                 <h2>My Journey</h2>
@@ -1258,7 +1334,7 @@ footer {
         </div>
     </section>
     <!-- Contact Section -->
-    <section id="contact" style="background: linear-gradient(135deg, #16213E 0%, #0F172A 100%);">
+    <section id="contact" class="contact-section" style="background: linear-gradient(135deg, #16213E 0%, #0F172A 100%);">
         <div class="container">
             <div class="section-title">
                 <h2>Get In Touch</h2>
@@ -1552,6 +1628,120 @@ window.addEventListener('load', setupPaperPlaneInteraction);
                 }
             }, 100);
         });
+
+
+        // ============================================
+// ANIMASI SCROLL SECTION-BY-SECTION
+// ============================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // --- 1. Hero Section - Muncul Otomatis Saat Halaman Dimuat ---
+    const heroSection = document.querySelector('.hero');
+    if (heroSection) {
+        setTimeout(() => {
+            heroSection.style.opacity = '1';
+            heroSection.style.transform = 'translateY(0)';
+        }, 100);
+    }
+    
+    // --- 2. Setup Intersection Observer untuk Section Lainnya ---
+    const sectionObserverOptions = {
+        threshold: 0.1, // Section terlihat 10% sudah trigger animasi
+        rootMargin: '0px 0px -50px 0px' // Trigger sedikit sebelum section fully visible
+    };
+    
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Tambahkan class 'visible' untuk trigger animasi
+                entry.target.classList.add('visible');
+                
+                // Jika section adalah Skills, animasikan skill cards berantai
+                if (entry.target.id === 'skills') {
+                    animateSkillCards();
+                }
+                
+                // Jika section adalah Experience, animasikan timeline items berantai
+                if (entry.target.id === 'experience') {
+                    animateTimelineItems();
+                }
+                
+                // Hentikan observasi setelah animasi dimulai
+                sectionObserver.unobserve(entry.target);
+            }
+        });
+    }, sectionObserverOptions);
+    
+    // --- 3. Apply Observer ke Setiap Section ---
+    const sectionsToAnimate = [
+        { element: document.getElementById('about'), delay: 0 },
+        { element: document.getElementById('skills'), delay: 0 },
+        { element: document.getElementById('experience'), delay: 0 },
+        { element: document.getElementById('contact'), delay: 0 }
+    ];
+    
+    sectionsToAnimate.forEach((section, index) => {
+        if (section.element) {
+            // Tambahkan class section untuk CSS
+            section.element.classList.add(`${section.element.id}-section`);
+            
+            // Tambahkan observer dengan delay berdasarkan urutan
+            setTimeout(() => {
+                sectionObserver.observe(section.element);
+            }, section.delay);
+        }
+    });
+    
+    // --- 4. Fungsi untuk Animasi Skill Cards Berantai ---
+    function animateSkillCards() {
+        const skillCards = document.querySelectorAll('.skill-card');
+        skillCards.forEach((card, index) => {
+            setTimeout(() => {
+                card.classList.add('visible');
+            }, 200 * index); // Delay 200ms per card
+        });
+    }
+    
+    // --- 5. Fungsi untuk Animasi Timeline Items Berantai ---
+    function animateTimelineItems() {
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        timelineItems.forEach((item, index) => {
+            setTimeout(() => {
+                item.classList.add('visible');
+            }, 300 * index); // Delay 300ms per item
+        });
+    }
+    
+    // --- 6. Smooth Scroll untuk Tombol "Let's Connect" ---
+    const ctaButton = document.querySelector('.cta-button');
+    if (ctaButton) {
+        ctaButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                // Scroll dengan smooth behavior
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Highlight header saat scroll
+                const header = document.querySelector('header');
+                header.classList.add('scrolled');
+                setTimeout(() => {
+                    header.classList.remove('scrolled');
+                }, 2000);
+            }
+        });
+    }
+    
+});
     </script>
     <!-- Particle Container -->
     <div id="particles-js"></div>

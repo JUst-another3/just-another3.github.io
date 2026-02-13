@@ -5,1198 +5,835 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Portfolio of Naytaka Eka Putra - Digital Creator & Community Builder">
     <title>Naytaka Eka Putra | Portfolio</title>
+    
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <!-- Animate CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <style> /* ===========================================
-   VERSI 1: DESKTOP (PC/LAPTOP) - Lebar > 768px
-   =========================================== */
-/* Semua styling default adalah untuk desktop */
-:root {
-    --primary: #6C63FF;
-    --secondary: #4A44E0;
-    --accent: #FF6584;
-    --dark: #1A1A2E;
-    --light: #F8F9FF;
-    --gray: #6C757D;
-    --success: #28A745;
-    --shadow: 0 10px 30px rgba(108, 99, 255, 0.2);
-    --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-/* ===== CSS LENGKAP UNTUK SEMUA INTERAKSI JAVASCRIPT ===== */
-
-/* ===== 1. ANIMASI SMOOTH SCROLL SAAT KLIK "LET'S CONNECT" ===== */
-html {
-    scroll-behavior: smooth; /* Membuat scroll halus di seluruh halaman */
-}
-
-#contact {
-    scroll-margin-top: 100px; /* Memberi jarak dari header saat scroll */
-    animation: fadeInContact 1s ease-out forwards; /* Animasi saat tiba di contact section */
-}
-
-@keyframes fadeInContact {
-    from { 
-        opacity: 0; 
-        transform: translateY(30px); 
-    }
-    to { 
-        opacity: 1; 
-        transform: translateY(0); 
-    }
-}
-
-/* ===== 2. STYLING UNTUK IKON PESAWAT KERTAS (DRAG & CLICK) ===== */
-.contact-form i.fas.fa-paper-plane {
-    font-size: 3rem;
-    color: var(--primary);
-    margin-bottom: 20px;
-    transition: transform 0.4s ease;
-    cursor: grab; /* Ubah kursor menjadi tangan saat hover */
-    position: relative; /* Penting untuk posisi absolut saat drag */
-    z-index: 10; /* Pastikan di atas elemen lain */
-}
-
-.contact-form i.fas.fa-paper-plane:active {
-    cursor: grabbing; /* Ubah kursor saat sedang di-drag */
-}
-
-/* Animasi bounce saat diklik */
-.contact-form i.fas.fa-paper-plane.clicked {
-    animation: bounce 0.5s ease;
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-20px);
-    }
-    60% {
-        transform: translateY(-10px);
-    }
-}
-
-/* ===== 3. HEADER SCROLL EFFECT ===== */
-header.scrolled {
-    background: rgba(26, 26, 46, 0.95) !important; /* Lebih transparan saat scroll */
-    backdrop-filter: blur(15px); /* Efek blur lebih kuat */
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3); /* Bayangan lebih jelas */
-}
-
-/* ===== 4. NAVIGASI SMOOTH SCROLL ===== */
-.nav-links a.active {
-    color: var(--accent); /* Highlight link aktif */
-}
-
-.nav-links a.active::after {
-    width: 100%; /* Garis bawah penuh untuk link aktif */
-    background: var(--accent);
-}
-
-/* ===== 5. ANIMASI SECTION SAAT MUNCUL SAAT SCROLL ===== */
-.animate__fadeInUp {
-    animation-name: fadeInUp !important;
-    animation-duration: 0.8s !important;
-    animation-fill-mode: forwards !important;
-}
-
-/* ===== 6. CONTACT ITEMS DENGAN ANIMASI SCROLL ===== */
-.contact-item {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.contact-item.appear {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* ===== 7. MOBILE MENU TOGGLE ===== */
-.mobile-toggle:focus {
-    outline: none; /* Hilangkan outline default */
-    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.5); /* Fokus ring untuk aksesibilitas */
-}
-
-/* ===== 8. HOVER EFFECTS TAMBAHAN ===== */
-/* Efek hover pada semua tombol */
-.cta-button:hover {
-    transform: translateY(-5px) scale(1.03);
-    box-shadow: 0 20px 40px rgba(108, 99, 255, 0.5);
-}
-
-/* Efek saat hover pada ikon sosial */
-.social-links a:active {
-    transform: scale(0.95); /* Efek "ditekan" */
-}
-
-/* ===== 9. DRAG EFFECT VISUAL ===== */
-.dragging {
-    cursor: grabbing !important;
-    opacity: 0.9; /* Sedikit transparan saat di-drag */
-    z-index: 1000 !important; /* Pastikan di atas semua elemen */
-    box-shadow: 0 0 20px rgba(108, 99, 255, 0.8); /* Bayangan khusus saat drag */
-}
-
-/* ===== 10. ANIMASI LOADING SAAT HALAMAN DIMUAT ===== */
-.loading-animation {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--dark);
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 1;
-    transition: opacity 0.5s ease;
-}
-
-.loading-animation.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.loading-spinner {
-    width: 80px;
-    height: 80px;
-    border: 5px solid rgba(255, 255, 255, 0.1);
-    border-top: 5px solid var(--primary);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* ===== 11. RESPONSIVE INTERAKSI UNTUK MOBILE ===== */
-@media (max-width: 768px) {
-    /* Ukuran lebih besar untuk target touch */
-    .contact-form i.fas.fa-paper-plane {
-        font-size: 4rem;
-        touch-action: none; /* Mencegah default touch behavior */
-    }
     
-    .mobile-toggle:active {
-        transform: scale(0.95);
-    }
-    
-    /* Animasi lebih lambat untuk mobile */
-    .ct
-    
-body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
-    color: var(--light);
-    line-height: 1.6;
-    overflow-x: hidden;
-    position: relative;
-    background-attachment: fixed;
-}
-
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 10% 20%, rgba(108, 99, 255, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(255, 101, 132, 0.1) 0%, transparent 20%);
-    z-index: -1;
-}
-
-.container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* Header & Navigation - Desktop */
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;F
-    padding: 20px 0;
-    transition: var(--transition);
-    backdrop-filter: blur(10px);
-}
-
-header.scrolled {
-    background: rgba(26, 26, 46, 0.9);
-    padding: 15px 0;
-    box-shadow: var(--shadow);
-}
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: var(--primary);
-    text-decoration: none;
-    position: relative;
-    animation: pulse 2s infinite;
-}
-
-.logo::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transition: var(--transition);
-    transform-origin: left;
-}
-
-.logo:hover::after {
-    transform: scaleX(1);
-}
-
-.nav-links {
-    display: flex;
-    gap: 30px;
-}
-
-.nav-links a {
-    color: var(--light);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1rem;
-    position: relative;
-    padding: 5px 0;
-    transition: var(--transition);
-}
-
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--primary);
-    transition: var(--transition);
-}
-
-.nav-links a:hover {
-    color: var(--primary);
-}
-
-.nav-links a:hover::after {
-    width: 100%;
-}
-
-.mobile-toggle {
-    display: none; /* Sembunyikan tombol mobile di desktop */
-}
-
-/* Hero Section - Desktop */
-.hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 120px 0 80px;
-    position: relative;
-    overflow: hidden;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(108, 99, 255, 0.1) 0%, transparent 70%);
-    z-index: -1;
-    animation: rotate 20s linear infinite;
-}
-
-.hero-content {
-    max-width: 600px;
-    animation: fadeInUp 1s ease-out;
-}
-
-.hero h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 4rem;
-    font-weight: 800;
-    line-height: 1.2;
-    margin-bottom: 20px;
-    color: #6C63FF;
-    position: relative;
-    opacity: 0;
-    animation: fadeInUp 1s ease-out 0.5s forwards;
-}
-
-.hero h1 span {
-    display: inline-block;
-    color: #FF6584;
-    animation: wave 2s infinite;
-}
-
-.hero h1::after {
-    content: '';
-    position: absolute;
-    bottom: 10px;
-    left: 0;
-    width: 80px;
-    height: 4px;
-    background: var(--accent);
-    border-radius: 2px;
-    animation: drawLine 1s ease-out 1.5s forwards;
-    transform: scaleX(0);
-    transform-origin: left;
-}
-
-.hero p {
-    font-size: 1.2rem;
-    color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 30px;
-    max-width: 500px;
-    opacity: 0;
-    animation: fadeInUp 1s ease-out 1s forwards;
-}
-
-.cta-button {
-    display: inline-block;
-    padding: 15px 40px;
-    background: linear-gradient(45deg, var(--primary), var(--secondary));
-    color: white;
-    text-decoration: none;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: var(--transition);
-    box-shadow: var(--shadow);
-    border: none;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    opacity: 0;
-    animation: fadeInUp 1s ease-out 1.5s forwards;
-}
-
-.cta-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: var(--transition);
-}
-
-.cta-button:hover::before {
-    left: 100%;
-}
-
-.cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(108, 99, 255, 0.4);
-}
-
-.hero-image {
-    position: absolute;
-    right: 5%;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 400px;
-    height: 400px;
-    border-radius: 50%;
-    box-shadow: 0 0 50px rgba(108, 99, 255, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: float 6s ease-in-out infinite;
-    opacity: 10;
-    animation: fadeInRight 1s ease-out 2s forwards;
-    overflow: hidden; /* Pastikan konten tidak keluar dari lingkaran */
-}
-
-.hero-image::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0);
-    /* HAPUS backdrop-filter: blur(10px) agar gambar tidak buram */
-}
-
-/* Section Styling - Desktop */
-section {
-    padding: 80px 0;
-    position: relative;
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: 60px;
-}
-
-.section-title h2 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 15px;
-    background: linear-gradient(45deg, var(--primary), var(--accent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    opacity: 0;
-    animation: fadeInUp 1s ease-out 0.3s forwards;
-}
-
-.section-title p {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 1.1rem;
-    max-width: 600px;
-    margin: 0 auto;
-    opacity: 0;
-    animation: fadeInUp 1s ease-out 0.6s forwards;
-}
-
-/* About Section - Desktop */
-.about-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
-    align-items: center;
-}
-
-.about-text {
-    animation: fadeInLeft 1s ease-out 0.5s forwards;
-    opacity: 0;
-}
-
-.about-text h3 {
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-    color: var(--primary);
-}
-
-.about-text p {
-    margin-bottom: 20px;
-    color: rgba(255, 255, 255, 0.85);
-}
-
-.personal-info {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-}
-
-.info-item {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 20px;
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(108, 99, 255, 0.2);
-    transition: var(--transition);
-    opacity: 0;
-    animation: fadeInUp 0.8s ease-out forwards;
-    animation-delay: 0.7s;
-}
-
-.info-item:nth-child(2) { animation-delay: 0.9s; }
-.info-item:nth-child(3) { animation-delay: 1.1s; }
-.info-item:nth-child(4) { animation-delay: 1.3s; }
-
-.info-item:hover {
-    transform: translateY(-5px);
-    border-color: var(--primary);
-    background: rgba(108, 99, 255, 0.1);
-}
-
-.info-item i {
-    color: var(--primary);
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    display: block;
-}
-
-.info-item h4 {
-    font-size: 1rem;
-    color: var(--primary);
-    margin-bottom: 5px;
-}
-
-.info-item p {
-    color: rgba(255, 255, 255, 0.85);
-    margin: 0;
-}
-
-/* Skills Section - Desktop */
-.skills-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.skill-card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 30px;
-    text-align: center;
-    transition: var(--transition);
-    border: 1px solid rgba(108, 99, 255, 0.2);
-    position: relative;
-    overflow: hidden;
-    opacity: 0;
-    transform: translateY(30px);
-    animation: slideInUp 1s ease-out forwards;
-}
-
-.skill-card:nth-child(1) { animation-delay: 0.2s; }
-.skill-card:nth-child(2) { animation-delay: 0.4s; }
-.skill-card:nth-child(3) { animation-delay: 0.6s; }
-.skill-card:nth-child(4) { animation-delay: 0.8s; }
-.skill-card:nth-child(5) { animation-delay: 1.0s; }
-
-.skill-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background: linear-gradient(90deg, var(--primary), var(--accent));
-}
-
-.skill-card:hover {
-    transform: translateY(-10px);
-    box-shadow: var(--shadow);
-    border-color: var(--primary);
-}
-
-.skill-icon {
-    font-size: 3rem;
-    color: var(--primary);
-    margin-bottom: 20px;
-}
-
-.skill-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    color: white;
-}
-
-.skill-bar {
-    width: 100%;
-    height: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-    margin: 20px 0;
-    overflow: hidden;
-}
-
-.skill-progress {
-    height: 100%;
-    background: linear-gradient(90deg, var(--primary), var(--accent));
-    border-radius: 4px;
-    transition: width 1.5s ease-out;
-    width: 0%;
-}
-
-/* Experience Section - Desktop */
-.timeline {
-    position: relative;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.timeline::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 0;
-    width: 4px;
-    height: 100%;
-    background: var(--primary);
-    transform: translateX(-50%);
-}
-
-.timeline-item {
-    position: relative;
-    width: 50%;
-    padding: 20px 40px;
-}
-
-.timeline-item:nth-child(odd) {
-    left: 0;
-}
-
-.timeline-item:nth-child(even) {
-    left: 50%;
-}
-
-.timeline-content {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 30px;
-    position: relative;
-    border: 1px solid rgba(108, 99, 255, 0.2);
-    transition: var(--transition);
-    opacity: 0;
-    transform: translateX(50px);
-    animation: slideInLeft 1s ease-out forwards;
-}
-
-.timeline-item:nth-child(even) .timeline-content {
-    transform: translateX(-50px);
-    animation: slideInRight 1s ease-out forwards;
-}
-
-.timeline-item:nth-child(odd) .timeline-content {
-    animation-delay: 0.5s;
-}
-
-.timeline-item:nth-child(even) .timeline-content {
-    animation-delay: 0.5s;
-}
-
-.timeline-content:hover {
-    transform: translateX(0);
-    border-color: var(--primary);
-    background: rgba(108, 99, 255, 0.1);
-}
-
-.timeline-item:nth-child(even) .timeline-content:hover {
-    transform: translateX(0);
-}
-
-.timeline-content::before {
-    content: '';
-    position: absolute;
-    top: 20px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--primary);
-}
-
-.timeline-item:nth-child(odd) .timeline-content::before {
-    right: -10px;
-}
-
-.timeline-item:nth-child(even) .timeline-content::before {
-    left: -10px;
-}
-
-.timeline-content h3 {
-    font-size: 1.3rem;
-    color: var(--primary);
-    margin-bottom: 10px;
-}
-
-.timeline-content .role {
-    font-weight: 600;
-    color: white;
-    margin-bottom: 5px;
-}
-
-.timeline-content .period {
-    color: var(--accent);
-    font-weight: 500;
-    margin-bottom: 15px;
-    display: block;
-}
-
-.timeline-content p {
-    color: rgba(255, 255, 255, 0.85);
-    margin-bottom: 0;
-}
-
-/* Contact Section - Desktop */
-.contact-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 50px;
-}
-
-.contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-}
-
-.contact-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-    animation: fadeInLeft 1s ease-out 0.5s forwards;
-    opacity: 0;
-}
-
-.contact-icon {
-    min-width: 60px;
-    height: 60px;
-    background: rgba(108, 99, 255, 0.15);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    color: var(--primary);
-    transition: var(--transition);
-}
-
-.contact-item:hover .contact-icon {
-    transform: scale(1.2);
-    background: rgba(108, 99, 255, 0.3);
-    animation: rotateIcon 0.6s ease-in-out;
-}
-
-.contact-details h3 {
-    font-size: 1.2rem;
-    margin-bottom: 5px;
-    color: white;
-}
-
-.contact-details p, .contact-details a {
-    color: rgba(255, 255, 255, 0.85);
-    text-decoration: none;
-    transition: var(--transition);
-}
-
-.contact-details a:hover {
-    color: var(--primary);
-}
-
-.social-links {
-    display: flex;
-    gap: 15px;
-    margin-top: 10px;
-}
-
-.social-links a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--primary);
-    font-size: 1.2rem;
-    transition: var(--transition);
-    border: 1px solid rgba(108, 99, 255, 0.3);
-}
-
-.social-links a:hover {
-    background: var(--primary);
-    color: white;
-    transform: translateY(-3px);
-}
-
-.social-links a i {
-    color: #6C63FF;
-}
-
-.social-links a:hover i {
-    color: #FF6584;
-}
-
-/* Footer - Desktop */
-footer {
-    background: rgba(13, 13, 23, 0.95);
-    padding: 50px 0 20px;
-    text-align: center;
-    border-top: 1px solid rgba(108, 99, 255, 0.3);
-}
-
-.footer-content {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.footer-logo {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2rem;
-    font-weight: 800;
-    color: var(--primary);
-    margin-bottom: 20px;
-    display: inline-block;
-    animation: pulse 2s infinite;
-}
-
-.copyright {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.9rem;
-    margin-top: 20px;
-}
-
-/* Animasi Tambahan - Desktop */
-.contact-form i.fas.fa-paper-plane {
-    font-size: 3rem;
-    color: var(--primary);
-    margin-bottom: 20px;
-    transition: transform 0.4s ease;
-    cursor: pointer;
-}
-
-.contact-form i.fas.fa-paper-plane.clicked {
-    animation: bounce 0.5s ease;
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-20px);
-    }
-    60% {
-        transform: translateY(-10px);
-    }
-}
-
-.social-links a:hover i {
-    animation: rotateIcon 0.6s ease-in-out;
-}
-
-@keyframes rotateIcon {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* Animasi Dasar */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes fadeInRight {
-    from {
-        opacity: 0;
-        transform: translateX(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(-50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-@keyframes rotate {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@keyframes wave {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(5deg); }
-    75% { transform: rotate(-5deg); }
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(-50%) translateX(0); }
-    50% { transform: translateY(-55%) translateX(5px); }
-}
-
-@keyframes drawLine {
-    to { transform: scaleX(1); }
-}
-
-/* ===========================================
-   VERSI 2: MOBILE (HP/TABLET) - Lebar ≤ 768px
-   =========================================== */
-@media (max-width: 768px) {
-    /* Header & Navigation - Mobile */
-    .mobile-toggle {
-        display: block;
-        background: none;
-        border: none;
-        color: var(--light);
-        font-size: 1.5rem;
-        cursor: pointer;
-    }
-    
-    .nav-links {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: rgba(26, 26, 46, 0.95);
-        flex-direction: column;
-        align-items: center;
-        padding: 20px 0;
-        gap: 15px;
-        backdrop-filter: blur(10px);
-    }
-    
-    .nav-links.show {
-        display: flex;
-    }
-    
-    /* Background attachment - mobile */
-    body {
-        background-attachment: scroll;
-    }
-    
-    /* Hero Section - Mobile */
-    .hero {
-        text-align: center;
-        padding: 150px 0 220px; /* Tambahkan padding bawah untuk ruang Nyan Cat */
-        min-height: auto;
-    }
-    
-    .hero-content {
-        margin: 0 auto;
-    }
-    
-    .hero h1 {
-        font-size: 2.8rem;
-    }
-    
-    .hero p {
-        font-size: 1.1rem;
-    }
-    
-    /* TAMPILKAN Nyan Cat di tengah bawah untuk mobile */
-    .hero-image {
-        display: auto; /* Aktifkan kembali */
-        position: absolute;
-        right: auto; /* Hapus posisi kanan */
-        left: 50%; /* Pindah ke tengah horizontal */
-        top: auto; /* Hapus posisi atas */
-        bottom: 40px; /* Tempatkan di bawah */
-        transform: translateX(-50%); /* Pusatkan secara horizontal */
-        width: 240px; /* Perkecil ukuran */
-        height: 240px; /* Perkecil ukuran */
-        margin: 0 auto;
-        z-index: 1;
-        animation: none; /* Hapus animasi float untuk mobile */
-    }
-    
-    .hero-image::before {
-        width: 230px;
-        height: 230px;
-    }
-    
-    /* Section Styling - Mobile */
-    section {
-        padding: 60px 0;
-    }
-    
-    .section-title h2 {
-        font-size: 2rem;
-    }
-    
-    /* About Section - Mobile */
-    .about-content {
-        grid-template-columns: 1fr;
-    }
-    
-    .personal-info {
-        grid-template-columns: 1fr;
-    }
-    
-    /* Experience Section - Mobile */
-    .timeline::before {
-        left: 31px;
-    }
-    
-    .timeline-item {
-        width: 100%;
-        padding-left: 70px;
-        padding-right: 25px;
-    }
-    
-    .timeline-item:nth-child(odd),
-    .timeline-item:nth-child(even) {
-        left: 0;
-    }
-    
-    .timeline-content::before,
-    .timeline-item:nth-child(even) .timeline-content::before {
-        left: -10px;
-    }
-    
-    /* Contact Section - Mobile */
-    .contact-container {
-        grid-template-columns: 1fr;
-    }
-    
-    /* Footer - Mobile */
-    .footer-content .social-links {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    }
-}
-
-/* ===== ANIMASI SCROLL SECTION-BY-SECTION ===== */
-
-/* Hero Section - Initial state */
-.hero {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 1s ease, transform 1s ease;
-}
-
-/* Hero Section - Visible state */
-.hero.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-    
-/* About Section - Slide dari kiri */
-.about-section {
-    opacity: 0;
-    transform: translateX(-50px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.about-section.visible {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* Skills Section - Fade in dari bawah dengan bounce */
-.skills-section {
-    opacity: 0;
-    transform: translateY(50px) scale(0.95);
-    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.skills-section.visible {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-}
-
-/* Experience Section - Slide dari kanan */
-.experience-section {
-    opacity: 0;
-    transform: translateX(50px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.experience-section.visible {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* Contact Section - Zoom in dari kecil */
-.contact-section {
-    opacity: 0;
-    transform: scale(0.8);
-    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.contact-section.visible {
-    opacity: 1;
-    transform: scale(1);
-}
-
-/* Timeline items dengan animasi berantai */
-.timeline-item.visible .timeline-content {
-    opacity: 1 !important;
-    transform: translateX(0) !important;
-}
-
-/* Skill cards dengan animasi berantai */
-.skill-card.visible {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-}
-    
-</style>
+    <style>
+        /* ===== VARIABEL GLOBAL ===== */
+        /* Warna dan nilai yang digunakan di seluruh website */
+        :root {
+            --primary: #6C63FF;      /* Warna utama (ungu) */
+            --secondary: #4A44E0;    /* Warna sekunder (ungu gelap) */
+            --accent: #FF6584;       /* Warna aksen (merah muda) */
+            --dark: #1A1A2E;         /* Warna gelap untuk background */
+            --light: #F8F9FF;        /* Warna terang untuk teks */
+            --shadow: 0 10px 30px rgba(108, 99, 255, 0.2);  /* Bayangan halus */
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Transisi halus */
+        }
+
+        /* ===== RESET DASAR ===== */
+        /* Menghilangkan margin dan padding default browser */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box; /* Memastikan ukuran elemen termasuk padding dan border */
+        }
+
+        /* ===== STYLING TUBUH UTAMA ===== */
+        /* Background gradien dan pengaturan teks utama */
+        body {
+            font-family: 'Poppins', sans-serif; /* Font utama */
+            background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%); /* Background gradien */
+            color: var(--light); /* Warna teks terang */
+            line-height: 1.6; /* Jarak antar baris */
+            overflow-x: hidden; /* Mencegah scroll horizontal */
+            position: relative; /* Untuk positioning elemen absolut */
+            background-attachment: fixed; /* Background tetap saat scroll */
+        }
+
+        /* Background attachment scroll untuk mobile */
+        @media (max-width: 768px) {
+            body {
+                background-attachment: scroll;
+            }
+        }
+
+        /* Lapisan dekoratif radial gradient di latar belakang */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(108, 99, 255, 0.1) 0%, transparent 20%),
+                        radial-gradient(circle at 90% 80%, rgba(255, 101, 132, 0.1) 0%, transparent 20%);
+            z-index: -1;
+        }
+
+        /* ===== KONTAINER UTAMA ===== */
+        /* Membungkus konten dan memberi jarak dari tepi layar */
+        .container {
+            width: 100%;
+            max-width: 1200px; /* Lebar maksimum konten */
+            margin: 0 auto; /* Pusatkan kontainer */
+            padding: 0 20px; /* Jarak dari tepi layar */
+        }
+
+        /* ===== ANIMASI SCROLL SECTION-BY-SECTION ===== */
+        /* About Section - Slide dari kiri */
+        .about-section {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .about-section.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Skills Section - Fade in dari bawah dengan bounce */
+        .skills-section {
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .skills-section.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Experience Section - Slide dari kanan */
+        .experience-section {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .experience-section.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Contact Section - Zoom in dari kecil */
+        .contact-section {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .contact-section.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Timeline items dengan animasi berantai */
+        .timeline-item.visible .timeline-content {
+            opacity: 1 !important;
+            transform: translateX(0) !important;
+        }
+
+        /* Skill cards dengan animasi berantai */
+        .skill-card.visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        /* ===== ANIMASI SMOOTH SCROLL SAAT KLIK "LET'S CONNECT" ===== */
+        html {
+            scroll-behavior: smooth; /* Membuat scroll halus di seluruh halaman */
+        }
+
+        #contact {
+            scroll-margin-top: 100px; /* Memberi jarak dari header saat scroll */
+            animation: fadeInContact 1s ease-out forwards; /* Animasi saat tiba di contact section */
+        }
+
+        @keyframes fadeInContact {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        /* ===== HEADER & NAVIGASI ===== */
+        /* Header tetap di atas saat scroll */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000; /* Tetap di atas elemen lain */
+            padding: 20px 0;
+            transition: var(--transition); /* Transisi halus saat scroll */
+            backdrop-filter: blur(10px); /* Efek blur pada header */
+        }
+
+        /* Header berubah saat di-scroll */
+        header.scrolled {
+            background: rgba(26, 26, 46, 0.9); /* Background semi-transparan */
+            padding: 15px 0;
+            box-shadow: var(--shadow); /* Bayangan saat di-scroll */
+        }
+
+        /* Navigasi dengan logo di kiri dan menu di kanan */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Styling logo */
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            position: relative;
+            animation: pulse 2s infinite; /* Animasi berdenyut */
+        }
+
+        /* Garis bawah animasi saat hover logo */
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: var(--transition);
+            transform-origin: left;
+        }
+
+        .logo:hover::after {
+            transform: scaleX(1); /* Garis muncul saat hover */
+        }
+
+        /* Menu navigasi desktop */
+        .nav-links {
+            display: flex;
+            gap: 30px; /* Jarak antar menu */
+        }
+
+        /* Styling link navigasi */
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            position: relative;
+            padding: 5px 0;
+            transition: var(--transition);
+        }
+
+        /* Garis bawah animasi saat hover menu */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%; /* Garis muncul penuh saat hover */
+        }
+
+        /* Tombol toggle menu mobile (hanya muncul di layar kecil) */
+        .mobile-toggle {
+            display: none; /* Disembunyikan di desktop */
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ===== HERO SECTION ===== */
+        /* Area utama dengan tinggi penuh layar */
+        .hero {
+            min-height: 100vh; /* Tinggi minimal penuh layar */
+            display: flex;
+            align-items: center; /* Tengah secara vertikal */
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden; /* Menyembunyikan overflow */
+        }
+
+        /* Konten teks di hero section */
+        .hero-content {
+            max-width: 600px;
+        }
+
+        /* Judul utama */
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: #6C63FF; /* Warna ungu solid */
+            position: relative;
+        }
+
+        /* Teks "Naytaka" dengan animasi goyang */
+        .hero h1 span {
+            display: inline-block;
+            color: #FF6584; /* Warna merah muda solid */
+            animation: wave 2s infinite; /* Animasi goyang */
+        }
+
+        /* Paragraf deskripsi */
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.85); /* Teks transparan */
+            margin-bottom: 30px;
+            max-width: 500px;
+        }
+
+        /* Tombol CTA (Call To Action) */
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary)); /* Gradient background */
+            color: white;
+            text-decoration: none;
+            border-radius: 50px; /* Sudut membulat */
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden; /* Untuk efek animasi */
+        }
+
+        /* Efek cahaya saat hover tombol */
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: var(--transition);
+        }
+
+        .cta-button:hover::before {
+            left: 100%; /* Cahaya bergerak dari kiri ke kanan */
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px); /* Bergerak naik sedikit */
+            box-shadow: 0 15px 35px rgba(108, 99, 255, 0.4); /* Bayangan lebih besar */
+        }
+
+        /* Gambar hero (Nyan Cat) */
+        .hero-image {
+            position: absolute; /* Posisi absolut agar bisa dipindahkan */
+            right: 5%; /* 5% dari tepi kanan */
+            top: 50%; /* 50% dari atas */
+            transform: translateY(-50%); /* Pusatkan secara vertikal */
+            width: 400px;
+            height: 400px;
+            border-radius: 50%; /* Lingkaran sempurna */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: float 6s ease-in-out infinite; /* Animasi melayang */
+            overflow: hidden; /* Pastikan konten tidak keluar dari lingkaran */
+        }
+
+        /* Konten dalam gambar hero */
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Memastikan gambar mengisi container dengan proporsi tepat */
+            border-radius: 50%; /* Lingkaran sempurna */
+        }
+
+        /* ===== SECTION STYLING UMUM ===== */
+        /* Padding untuk semua section */
+        section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        /* Judul section */
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, var(--primary), var(--accent)); /* Teks gradient */
+            -webkit-background-clip: text; /* Potong background sesuai teks */
+            -webkit-text-fill-color: transparent; /* Teks transparan */
+        }
+
+        .section-title p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ===== ABOUT SECTION ===== */
+        /* Grid layout untuk konten about */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Dua kolom */
+            gap: 50px;
+            align-items: center;
+        }
+
+        /* Konten teks about */
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        /* Info personal dalam grid */
+        .personal-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Dua kolom */
+            gap: 20px;
+        }
+
+        /* Kartu info personal */
+        .info-item {
+            background: rgba(255, 255, 255, 0.05); /* Background transparan */
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px); /* Efek blur */
+            border: 1px solid rgba(108, 99, 255, 0.2); /* Border transparan */
+            transition: var(--transition);
+        }
+
+        .info-item:hover {
+            transform: translateY(-5px); /* Bergerak naik saat hover */
+            border-color: var(--primary);
+            background: rgba(108, 99, 255, 0.1); /* Background lebih gelap saat hover */
+        }
+
+        /* ===== SKILLS SECTION ===== */
+        /* Grid responsif untuk kartu skill */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Kolom otomatis */
+            gap: 30px;
+        }
+
+        /* Kartu skill individual */
+        .skill-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(108, 99, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Garis atas berwarna pada kartu skill */
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px); /* Bergerak naik lebih jauh saat hover */
+            box-shadow: var(--shadow);
+            border-color: var(--primary);
+        }
+
+        /* Progress bar skill */
+        .skill-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1); /* Background transparan */
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden; /* Potong overflow untuk animasi */
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 4px;
+            transition: width 1.5s ease-out; /* Animasi pengisian */
+        }
+
+        /* ===== EXPERIENCE SECTION ===== */
+        /* Timeline layout */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Garis vertikal tengah untuk timeline */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary);
+            transform: translateX(-50%);
+        }
+
+        /* Item timeline dengan posisi kiri/kanan bergantian */
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 20px 40px;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        /* Konten item timeline */
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            border: 1px solid rgba(108, 99, 255, 0.2);
+            transition: var(--transition);
+        }
+
+        /* Titik lingkaran di timeline untuk setiap item */
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -10px;
+        }
+
+        /* ===== CONTACT SECTION ===== */
+        /* Grid untuk kontak (info di kiri, form di kanan) */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Dua kolom */
+            gap: 50px;
+        }
+
+        /* Item kontak individual */
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        /* Ikon kontak */
+        .contact-icon {
+            min-width: 60px;
+            height: 60px;
+            background: rgba(108, 99, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        /* Efek saat hover item kontak */
+        .contact-item:hover .contact-icon {
+            transform: scale(1.2); /* Membesar */
+            background: rgba(108, 99, 255, 0.3);
+        }
+
+        /* Tautan sosial media */
+        .social-links {
+            display: flex;
+            gap: 15px; /* Jarak antar ikon */
+        }
+
+        /* Ikon sosial media individual */
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--primary);
+            font-size: 1.2rem;
+            transition: var(--transition);
+            border: 1px solid rgba(108, 99, 255, 0.3);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px); /* Bergerak naik */
+        }
+
+        /* ===== STYLING UNTUK IKON PESAWAT KERTAS (DRAG & CLICK) ===== */
+        .contact-form i.fas.fa-paper-plane {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            transition: transform 0.4s ease;
+            cursor: grab; /* Ubah kursor menjadi tangan saat hover */
+            position: relative; /* Penting untuk posisi absolut saat drag */
+            z-index: 10; /* Pastikan di atas elemen lain */
+        }
+
+        .contact-form i.fas.fa-paper-plane:active {
+            cursor: grabbing; /* Ubah kursor saat sedang di-drag */
+        }
+
+        /* Animasi bounce saat diklik */
+        .contact-form i.fas.fa-paper-plane.clicked {
+            animation: bounce 0.5s ease;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* ===== FOOTER ===== */
+        /* Styling footer */
+        footer {
+            background: rgba(13, 13, 23, 0.95); /* Background gelap transparan */
+            padding: 50px 0 20px;
+            text-align: center;
+            border-top: 1px solid rgba(108, 99, 255, 0.3); /* Border atas transparan */
+        }
+
+        /* ===== ANIMASI KUSTOM ===== */
+        /* Animasi berdenyut untuk logo */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Animasi goyang untuk teks "Naytaka" */
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+
+        /* Animasi melayang untuk gambar hero */
+        @keyframes float {
+            0%, 100% { transform: translateY(-50%) translateX(0); }
+            50% { transform: translateY(-55%) translateX(5px); }
+        }
+
+        /* ===== MEDIA QUERY UNTUK HP (LAYAR < 768px) ===== */
+        /* Semua styling untuk perangkat mobile */
+        @media (max-width: 768px) {
+            /* Header mobile */
+            .mobile-toggle {
+                display: block; /* Tampilkan tombol toggle */
+            }
+            
+            /* Sembunyikan menu navigasi default */
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(26, 26, 46, 0.95);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                gap: 15px;
+                backdrop-filter: blur(10px);
+            }
+            
+            /* Tampilkan menu saat diklik */
+            .nav-links.show {
+                display: flex;
+            }
+            
+            /* Hero section mobile */
+            .hero {
+                text-align: center; /* Teks di tengah */
+                padding: 150px 0 250px; /* Tambah padding bawah untuk gambar */
+            }
+            
+            .hero-content {
+                margin: 0 auto; /* Pusatkan konten */
+                max-width: 100%; /* Lebar penuh */
+            }
+            
+            /* Pindahkan Nyan Cat ke tengah bawah */
+            .hero-image {
+                display: flex; /* Tampilkan gambar */
+                position: absolute;
+                right: auto; /* Hilangkan posisi kanan */
+                left: 50%; /* Posisi 50% dari kiri */
+                top: auto; /* Hilangkan posisi atas */
+                bottom: 20px; /* 20px dari bawah */
+                transform: translateX(-50%); /* Pusatkan secara horizontal */
+                width: 200px; /* Lebar lebih kecil */
+                height: 200px; /* Tinggi lebih kecil */
+                margin: 0 auto;
+                z-index: 1; /* Tetap di atas konten lain */
+                animation: none; /* Hapus animasi float untuk mobile */
+            }
+            
+            /* Ukuran font lebih kecil untuk mobile */
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            /* Section title mobile */
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            /* Grid untuk mobile menjadi satu kolom */
+            .about-content,
+            .contact-container,
+            .personal-info {
+                grid-template-columns: 1fr; /* Satu kolom saja */
+            }
+            
+            /* Timeline mobile */
+            .timeline::before {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-content::before,
+            .timeline-item:nth-child(even) .timeline-content::before {
+                left: -10px;
+            }
+            
+            /* Footer mobile */
+            .footer-content .social-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+        }
+
+        /* ===== MEDIA QUERY UNTUK PC (LAYAR >= 769px) ===== */
+        /* Semua styling untuk desktop/laptop */
+        @media (min-width: 769px) {
+            /* Header desktop */
+            header {
+                background: transparent; /* Header transparan di desktop */
+            }
+            
+            /* Hero section desktop */
+            .hero {
+                padding: 120px 0 80px; /* Padding default */
+            }
+            
+            /* Gambar hero di desktop */
+            .hero-image {
+                right: 5%; /* 5% dari tepi kanan */
+                top: 50%; /* 50% dari atas */
+                transform: translateY(-50%); /* Pusatkan secara vertikal */
+                width: 400px; /* Ukuran desktop */
+                height: 400px;
+            }
+            
+            /* About section desktop */
+            .about-content {
+                grid-template-columns: 1fr 1fr; /* Dua kolom */
+            }
+            
+            /* Skills section desktop */
+            .skills-container {
+                grid-template-columns: repeat(3, 1fr); /* Tiga kolom di desktop */
+            }
+            
+            /* Contact section desktop */
+            .contact-container {
+                grid-template-columns: 1fr 1fr; /* Dua kolom */
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Parallax Background Layers -->
     <div class="parallax-layer"></div>
     <div class="parallax-layer"></div>
+    
     <!-- Header -->
     <header id="header">
         <div class="container">
@@ -1214,21 +851,23 @@ footer {
             </nav>
         </div>
     </header>
-   <!-- Hero Section -->
-<section class="hero" id="home">
-    <div class="container">
-        <div class="hero-content">
-            <h1>Hello, I'm <span>Naytaka</span></h1>
-            <p>A passionate digital creator and community builder with a focus on gaming, design, and sustainable innovation. Let's create something amazing together!</p>
-            <a href="#contact" class="cta-button">Let's Connect</a>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Hello, I'm <span>Naytaka</span></h1>
+                <p>A passionate digital creator and community builder with a focus on gaming, design, and sustainable innovation. Let's create something amazing together!</p>
+                <a href="#contact" class="cta-button">Let's Connect</a>
+            </div>
+            <div class="hero-image">
+                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 50%;">
+                    <img src="nyan-cat-cat.gif" alt="Nyan Cat" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </div>
         </div>
-    <div class="hero-image">
-    <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 50%;"> <!-- Pastikan border-radius 50% untuk lingkaran -->
-        <img src="nyan-cat.gif" alt="Nyan Cat" style="width: 100%; height: 100%; object-fit: cover;"> <!-- Gunakan path lokal ke GIF Anda -->  
-             </div>
-        </div>
-    </div>
-</section>
+    </section>
+    
     <!-- About Section -->
     <section id="about" class="about-section">
         <div class="container">
@@ -1268,6 +907,7 @@ footer {
             </div>
         </div>
     </section>
+    
     <!-- Skills Section -->
     <section id="skills" class="skills-section" style="background: rgba(22, 33, 62, 0.7);">
         <div class="container">
@@ -1281,31 +921,55 @@ footer {
                         <i class="fas fa-star"></i>
                     </div>
                     <h3>Mobile Gaming (Honor of Kings)</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-level="85%"></div>
+                    </div>
+                    <p>85% proficiency</p>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">
                         <i class="fas fa-star"></i>
                     </div>
                     <h3>Basic Tool Repair & Maintenance</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-level="70%"></div>
+                    </div>
+                    <p>70% proficiency</p>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">
                         <i class="fas fa-star"></i>
                     </div>
                     <h3>Sustainability & Cardboard Recycling</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-level="75%"></div>
+                    </div>
+                    <p>75% proficiency</p>
+                </div>
                 <div class="skill-card">
                     <div class="skill-icon">
                         <i class="fas fa-star"></i>
                     </div>
                     <h3>Microsoft Office Suite</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-level="60%"></div>
+                    </div>
+                    <p>60% proficiency</p>
+                </div>
                 <div class="skill-card">
                     <div class="skill-icon">
                         <i class="fas fa-star"></i>
                     </div>
                     <h3>Canva Design & Content Creation</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-level="65%"></div>
+                    </div>
+                    <p>65% proficiency</p>
+                </div>
             </div>
         </div>
     </section>
+    
     <!-- Experience Section -->
     <section id="experience" class="experience-section">
         <div class="container">
@@ -1324,7 +988,7 @@ footer {
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <h3><a href="https://www.instagram.com/osissmkgalajuara/">OSIS  (Student Council</a>)</h3>
+                        <h3><a href="https://www.instagram.com/osissmkgalajuara/">OSIS (Student Council)</a></h3>
                         <span class="role">Student Organization Member</span>
                         <span class="period">2024 - Present</span>
                         <p>Contributed to school event planning and student welfare programs.</p>
@@ -1333,6 +997,7 @@ footer {
             </div>
         </div>
     </section>
+    
     <!-- Contact Section -->
     <section id="contact" class="contact-section" style="background: linear-gradient(135deg, #16213E 0%, #0F172A 100%);">
         <div class="container">
@@ -1375,17 +1040,17 @@ footer {
                         </div>
                         <div class="contact-details">
                             <h3>Connect With Me</h3>
-                          <div class="social-links">
-    <a href="https://x.com/JusT_Idk4nymor4"><i class="fab fa-twitter" ></i></a> <!-- Ganti fa-whatsapp ke fa-x-twitter -->
-    <a href="https://instagram.com/zeklith_091/"><i class="fab fa-instagram"></i></a>
-    <a href="https://facebook.com/profile.php?id=61583621862783"><i class="fab fa-facebook"></i></a>
-</div>
+                            <div class="social-links">
+                                <a href="https://x.com/JusT_Idk4nymor4"><i class="fab fa-twitter"></i></a>
+                                <a href="https://instagram.com/zeklith_091/"><i class="fab fa-instagram"></i></a>
+                                <a href="https://facebook.com/profile.php?id=61583621862783"><i class="fab fa-facebook"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="contact-form">
                     <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border-radius: 20px; padding: 40px; text-align: center; border: 1px solid rgba(108, 99, 255, 0.2);">
-                        <i class="fas fa-paper-plane" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
+                        <i class="fas fa-paper-plane"></i>
                         <h3 style="font-size: 1.8rem; margin-bottom: 15px; color: white;">Ready to Collaborate?</h3>
                         <p style="color: rgba(255, 255, 255, 0.85); margin-bottom: 25px;">I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
                         <a href="mailto:nayakasptr4008@gmail.com" class="cta-button" style="background: linear-gradient(45deg, var(--accent), #FF4D70);">Send Email</a>
@@ -1394,6 +1059,7 @@ footer {
             </div>
         </div>
     </section>
+    
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -1401,7 +1067,7 @@ footer {
                 <a href="https://discord.com/users/881527113985978408" class="footer-logo">Naytaka</a>
                 <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 15px;">Digital Creator & Community Builder</p>
                 <div class="social-links" style="justify-content: center; margin-bottom: 20px;">
-                    <a href="https://x.com/JusT_Idk4nymor4"> <i class="fab fa-twitter"> </i></a>
+                    <a href="https://x.com/JusT_Idk4nymor4"><i class="fab fa-twitter"></i></a>
                     <a href="https://instagram.com/zeklith_091/"><i class="fab fa-instagram"></i></a>
                     <a href="https://facebook.com/profile.php?id=61583621862783"><i class="fab fa-facebook"></i></a>
                 </div>
@@ -1409,352 +1075,258 @@ footer {
             </div>
         </div>
     </footer>
+    
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // --- Bagian lain dari script Anda ---
-// Fungsi untuk interaksi klik dan drag pada ikon paper-plane
-function setupPaperPlaneInteraction() {
-    const paperPlaneIcon = document.querySelector('.contact-form .fas.fa-paper-plane');
-    if (!paperPlaneIcon) {
-        console.error('Ikon paper-plane tidak ditemukan!');
-        return;
-    }
-    // --- Interaksi Klik ---
-    paperPlaneIcon.addEventListener('click', function() {
-        // Tambahkan kelas untuk animasi
-        this.classList.add('clicked');
-        // Hapus kelas setelah animasi selesai untuk bisa diulang
-        setTimeout(() => {
-            this.classList.remove('clicked');
-        }, 500); // Harus sesuai durasi animasi (0.5s)
-    });
-    // --- Interaksi Drag ---
-    let isDragging = false;
-    let currentX;
-    let currentY;
-    let initialX;
-    let initialY;
-    let xOffset = 0;
-    let yOffset = 0;
-    // Fungsi saat mouse down (atau touch start)
-    function dragStart(e) {
-        // Hentikan animasi klik jika sedang berjalan
-        paperPlaneIcon.classList.remove('clicked');
-        setTimeout(() => {
-            paperPlaneIcon.classList.remove('clicked');
-        }, 10);
-        initialX = e.clientX - xOffset;
-        initialY = e.clientY - yOffset;
-        if (e.type === "touchstart") {
-            initialX = e.touches[0].clientX - xOffset;
-            initialY = e.touches[0].clientY - yOffset;
-        }
-        isDragging = true;
-    }
-    // Fungsi saat mouse move (atau touch move)
-    function drag(e) {
-        if (isDragging) {
-            e.preventDefault(); // Mencegah scroll saat drag
-            currentX = e.clientX - initialX;
-            currentY = e.clientY - initialY;
-            if (e.type === "touchmove") {
-            currentX = e.touches[0].clientX - initialX;
-            currentY = e.touches[0].clientY - initialY;
-        }
-            xOffset = currentX;
-            yOffset = currentY;
-            // Terapkan transformasi ke ikon
-            setTranslate(currentX, currentY, paperPlaneIcon);
-        }
-    }
-    // Fungsi saat mouse up (atau touch end)
-    function dragEnd(e) {
-        initialX = currentX;
-        initialY = currentY;
-        isDragging = false;
-    }
-    // Fungsi untuk menerapkan posisi
-    function setTranslate(xPos, yPos, el) {
-        el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
-    }
-    // Tambahkan event listeners
-    paperPlaneIcon.addEventListener("mousedown", dragStart);
-    paperPlaneIcon.addEventListener("touchstart", dragStart);
-    document.addEventListener("mousemove", drag);
-    document.addEventListener("touchmove", drag);
-    document.addEventListener("mouseup", dragEnd);
-    document.addEventListener("touchend", dragEnd);
-}
-// Panggil fungsi saat halaman selesai dimuat
-window.addEventListener('load', setupPaperPlaneInteraction);
-// --- Bagian lain dari script Anda ---
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById('header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+        // ============================================
+        // ANIMASI SCROLL SECTION-BY-SECTION
+        // ============================================
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // --- 1. Hero Section - Muncul Otomatis Saat Halaman Dimuat ---
+            const heroSection = document.querySelector('.hero');
+            if (heroSection) {
+                setTimeout(() => {
+                    heroSection.style.opacity = '1';
+                    heroSection.style.transform = 'translateY(0)';
+                }, 100);
             }
-        });
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    window.scrollTo({
-                        top: target.offsetTop - 80,
-                        behavior: 'smooth'
+            
+            // --- 2. Setup Intersection Observer untuk Section Lainnya ---
+            const sectionObserverOptions = {
+                threshold: 0.1, // Section terlihat 10% sudah trigger animasi
+                rootMargin: '0px 0px -50px 0px' // Trigger sedikit sebelum section fully visible
+            };
+            
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Tambahkan class 'visible' untuk trigger animasi
+                        entry.target.classList.add('visible');
+                        
+                        // Jika section adalah Skills, animasikan skill cards berantai
+                        if (entry.target.id === 'skills') {
+                            animateSkillCards();
+                        }
+                        
+                        // Jika section adalah Experience, animasikan timeline items berantai
+                        if (entry.target.id === 'experience') {
+                            animateTimelineItems();
+                        }
+                        
+                        // Hentikan observasi setelah animasi dimulai
+                        sectionObserver.unobserve(entry.target);
+                    }
+                });
+            }, sectionObserverOptions);
+            
+            // --- 3. Apply Observer ke Setiap Section ---
+            const sectionsToAnimate = [
+                { element: document.getElementById('about'), delay: 0 },
+                { element: document.getElementById('skills'), delay: 0 },
+                { element: document.getElementById('experience'), delay: 0 },
+                { element: document.getElementById('contact'), delay: 0 }
+            ];
+            
+            sectionsToAnimate.forEach((section, index) => {
+                if (section.element) {
+                    // Tambahkan observer dengan delay berdasarkan urutan
+                    setTimeout(() => {
+                        sectionObserver.observe(section.element);
+                    }, section.delay);
+                }
+            });
+            
+            // --- 4. Fungsi untuk Animasi Skill Cards Berantai ---
+            function animateSkillCards() {
+                const skillCards = document.querySelectorAll('.skill-card');
+                const skillBars = document.querySelectorAll('.skill-progress');
+                
+                skillCards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.classList.add('visible');
+                        
+                        // Animate progress bars
+                        const bar = skillBars[index];
+                        if (bar) {
+                            const level = bar.getAttribute('data-level');
+                            bar.style.width = level;
+                        }
+                    }, 200 * index); // Delay 200ms per card
+                });
+            }
+            
+            // --- 5. Fungsi untuk Animasi Timeline Items Berantai ---
+            function animateTimelineItems() {
+                const timelineItems = document.querySelectorAll('.timeline-item');
+                timelineItems.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.classList.add('visible');
+                    }, 300 * index); // Delay 300ms per item
+                });
+            }
+            
+            // --- 6. Smooth Scroll untuk Tombol "Let's Connect" ---
+            const ctaButton = document.querySelector('.cta-button');
+            if (ctaButton) {
+                ctaButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        // Scroll dengan smooth behavior
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Highlight header saat scroll
+                        const header = document.querySelector('header');
+                        header.classList.add('scrolled');
+                        setTimeout(() => {
+                            header.classList.remove('scrolled');
+                        }, 2000);
+                    }
+                });
+            }
+            
+            // --- 7. Fungsi untuk Interaksi Klik dan Drag pada Ikon Paper Plane ---
+            function setupPaperPlaneInteraction() {
+                const paperPlaneIcon = document.querySelector('.contact-form .fas.fa-paper-plane');
+                if (!paperPlaneIcon) {
+                    console.error('Ikon paper-plane tidak ditemukan!');
+                    return;
+                }
+                
+                // --- Interaksi Klik ---
+                paperPlaneIcon.addEventListener('click', function() {
+                    // Tambahkan kelas untuk animasi
+                    this.classList.add('clicked');
+                    // Hapus kelas setelah animasi selesai untuk bisa diulang
+                    setTimeout(() => {
+                        this.classList.remove('clicked');
+                    }, 500); // Harus sesuai durasi animasi (0.5s)
+                });
+                
+                // --- Interaksi Drag ---
+                let isDragging = false;
+                let currentX;
+                let currentY;
+                let initialX;
+                let initialY;
+                let xOffset = 0;
+                let yOffset = 0;
+                
+                // Fungsi saat mouse down (atau touch start)
+                function dragStart(e) {
+                    // Hentikan animasi klik jika sedang berjalan
+                    paperPlaneIcon.classList.remove('clicked');
+                    setTimeout(() => {
+                        paperPlaneIcon.classList.remove('clicked');
+                    }, 10);
+                    
+                    initialX = e.clientX - xOffset;
+                    initialY = e.clientY - yOffset;
+                    if (e.type === "touchstart") {
+                        initialX = e.touches[0].clientX - xOffset;
+                        initialY = e.touches[0].clientY - yOffset;
+                    }
+                    isDragging = true;
+                }
+                
+                // Fungsi saat mouse move (atau touch move)
+                function drag(e) {
+                    if (isDragging) {
+                        e.preventDefault(); // Mencegah scroll saat drag
+                        currentX = e.clientX - initialX;
+                        currentY = e.clientY - initialY;
+                        if (e.type === "touchmove") {
+                            currentX = e.touches[0].clientX - initialX;
+                            currentY = e.touches[0].clientY - initialY;
+                        }
+                        xOffset = currentX;
+                        yOffset = currentY;
+                        // Terapkan transformasi ke ikon
+                        setTranslate(currentX, currentY, paperPlaneIcon);
+                    }
+                }
+                
+                // Fungsi saat mouse up (atau touch end)
+                function dragEnd(e) {
+                    initialX = currentX;
+                    initialY = currentY;
+                    isDragging = false;
+                }
+                
+                // Fungsi untuk menerapkan posisi
+                function setTranslate(xPos, yPos, el) {
+                    el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
+                }
+                
+                // Tambahkan event listeners
+                paperPlaneIcon.addEventListener("mousedown", dragStart);
+                paperPlaneIcon.addEventListener("touchstart", dragStart);
+                document.addEventListener("mousemove", drag);
+                document.addEventListener("touchmove", drag);
+                document.addEventListener("mouseup", dragEnd);
+                document.addEventListener("touchend", dragEnd);
+            }
+            
+            // Panggil fungsi saat halaman selesai dimuat
+            setupPaperPlaneInteraction();
+            
+            // --- 8. Header Scroll Effect ---
+            window.addEventListener('scroll', function() {
+                const header = document.getElementById('header');
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // --- 9. Smooth Scrolling untuk Navigation Links ---
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                if (anchor !== ctaButton) { // Skip CTA button yang sudah ditangani
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            window.scrollTo({
+                                top: target.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }
                     });
                 }
             });
-        });
-        // Parallax effect
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const parallax = document.querySelectorAll('.parallax-layer');
-            const speed = 0.5;
-            for (let i = 0; i < parallax.length; i++) {
-                const yPos = -(scrolled * parallax[i].dataset.speed || speed);
-                parallax[i].style.transform = `translateY(${yPos}px)`;
-            }
-        });
-        // Text typing effect
-        function typeWriter(element, text, speed = 50, callback) {
-            let i = 0;
-            function type() {
-                if (i < text.length) {
-                    element.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(type, speed);
-                } else if (callback) {
-                    callback();
-                }
-            }
-            type();
-        }
-      
-        }
-        // Intersection Observer untuk animasi scroll-triggered
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate__animated', 'animate__fadeInUp');
-                    if (entry.target.classList.contains('timeline')) {
-                        const timelineItems = entry.target.querySelectorAll('.timeline-content');
-                        timelineItems.forEach((item, index) => {
-                            setTimeout(() => {
-                                item.style.opacity = '1';
-                                item.style.transform = 'translateX(0)';
-                            }, 200 * index);
-                        });
-                    }
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-        // Apply observer to elements
-        document.querySelectorAll('.section-title, .about-text, .personal-info, .skills-container, .timeline, .contact-info').forEach(element => {
-            observer.observe(element);
-        });
-        // Initialize particles
-        particlesJS('particles-js', {
-            particles: {
-                number: { value: 80, density: { enable: true, value_area: 800 } },
-                color: { value: "#6C63FF" },
-                shape: { type: "circle" },
-                opacity: { value: 0.5, random: true },
-                size: { value: 3, random: true },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: "#6C63FF",
-                    opacity: 0.2,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 2,
-                    direction: "none",
-                    random: true,
-                    straight: false,
-                    out_mode: "out"
-                }
-            },
-            interactivity: {
-                detect_on: "canvas",
-                events: {
-                    onhover: { enable: true, mode: "grab" },
-                    onclick: { enable: true, mode: "push" },
-                    resize: true
-                }
-            },
-            retina_detect: true
-        });
-        // Mobile menu toggle
-        document.querySelector('.mobile-toggle')?.addEventListener('click', function() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.classList.toggle('show');
-        });
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', function() {
-                document.querySelector('.nav-links').classList.remove('show');
-            });
-        });
-        // Update year in copyright
-        document.querySelector('.copyright').innerHTML = `© ${new Date().getFullYear()} Naytaka Eka Putra. All rights reserved.`;
-        // Initial animations after page load
-        window.addEventListener('load', function()
-            );
-            // Start animations after a short delay
-            setTimeout(() => {
-                document.querySelectorAll('.skill-card').forEach(card => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                });
-                // Animate hero elements if they haven't loaded yet
-                if (window.pageYOffset === 0) {
-                    document.querySelector('.hero h1').style.animation = 'fadeInUp 1s ease-out 0.5s forwards';
-                    document.querySelector('.hero p').style.animation = 'fadeInUp 1s ease-out 1s forwards';
-                    document.querySelector('.cta-button').style.animation = 'fadeInUp 1s ease-out 1.5s forwards';
-                    document.querySelector('.hero-image').style.animation = 'fadeInRight 0.4s ease-out 1.25s forwards';
-                }
-            }, 100);
-        });
-
-
-        // ============================================
-// ANIMASI SCROLL SECTION-BY-SECTION
-// ============================================
-
-document.addEventListener('DOMContentLoaded', function() {
-    
-    // --- 1. Hero Section - Muncul Otomatis Saat Halaman Dimuat ---
-    const heroSection = document.querySelector('.hero');
-    if (heroSection) {
-        setTimeout(() => {
-            heroSection.style.opacity = '1';
-            heroSection.style.transform = 'translateY(0)';
-        }, 100);
-    }
-    
-    // --- 2. Setup Intersection Observer untuk Section Lainnya ---
-    const sectionObserverOptions = {
-        threshold: 0.1, // Section terlihat 10% sudah trigger animasi
-        rootMargin: '0px 0px -50px 0px' // Trigger sedikit sebelum section fully visible
-    };
-    
-    const sectionObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Tambahkan class 'visible' untuk trigger animasi
-                entry.target.classList.add('visible');
-                
-                // Jika section adalah Skills, animasikan skill cards berantai
-                if (entry.target.id === 'skills') {
-                    animateSkillCards();
-                }
-                
-                // Jika section adalah Experience, animasikan timeline items berantai
-                if (entry.target.id === 'experience') {
-                    animateTimelineItems();
-                }
-                
-                // Hentikan observasi setelah animasi dimulai
-                sectionObserver.unobserve(entry.target);
-            }
-        });
-    }, sectionObserverOptions);
-    
-    // --- 3. Apply Observer ke Setiap Section ---
-    const sectionsToAnimate = [
-        { element: document.getElementById('about'), delay: 0 },
-        { element: document.getElementById('skills'), delay: 0 },
-        { element: document.getElementById('experience'), delay: 0 },
-        { element: document.getElementById('contact'), delay: 0 }
-    ];
-    
-    sectionsToAnimate.forEach((section, index) => {
-        if (section.element) {
-            // Tambahkan class section untuk CSS
-            section.element.classList.add(`${section.element.id}-section`);
             
-            // Tambahkan observer dengan delay berdasarkan urutan
-            setTimeout(() => {
-                sectionObserver.observe(section.element);
-            }, section.delay);
-        }
-    });
-    
-    // --- 4. Fungsi untuk Animasi Skill Cards Berantai ---
-    function animateSkillCards() {
-        const skillCards = document.querySelectorAll('.skill-card');
-        skillCards.forEach((card, index) => {
-            setTimeout(() => {
-                card.classList.add('visible');
-            }, 200 * index); // Delay 200ms per card
-        });
-    }
-    
-    // --- 5. Fungsi untuk Animasi Timeline Items Berantai ---
-    function animateTimelineItems() {
-        const timelineItems = document.querySelectorAll('.timeline-item');
-        timelineItems.forEach((item, index) => {
-            setTimeout(() => {
-                item.classList.add('visible');
-            }, 300 * index); // Delay 300ms per item
-        });
-    }
-    
-    // --- 6. Smooth Scroll untuk Tombol "Let's Connect" ---
-    const ctaButton = document.querySelector('.cta-button');
-    if (ctaButton) {
-        ctaButton.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
+            // --- 10. Mobile Menu Toggle ---
+            document.querySelector('.mobile-toggle')?.addEventListener('click', function() {
+                const navLinks = document.querySelector('.nav-links');
+                navLinks.classList.toggle('show');
+            });
             
-            if (targetElement) {
-                // Scroll dengan smooth behavior
-                const headerHeight = document.querySelector('header').offsetHeight;
-                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function() {
+                    document.querySelector('.nav-links').classList.remove('show');
                 });
-                
-                // Highlight header saat scroll
-                const header = document.querySelector('header');
-                header.classList.add('scrolled');
-                setTimeout(() => {
-                    header.classList.remove('scrolled');
-                }, 2000);
-            }
+            });
+            
+            // --- 11. Update Year in Copyright ---
+            document.querySelector('.copyright').innerHTML = `© ${new Date().getFullYear()} Naytaka Eka Putra. All rights reserved.`;
+            
         });
-    }
-    
-});
     </script>
+    
     <!-- Particle Container -->
     <div id="particles-js"></div>
 </body>
 </html>
-
-
-
-
-
-
-                    
-
-
-
-

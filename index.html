@@ -1197,6 +1197,91 @@
             }
             
             // --- 7. Fungsi untuk Interaksi Klik dan Drag pada Ikon Paper Plane ---
+f  function setupPaperPlaneInteraction() {
+                const paperPlaneIcon = document.querySelector('.contact-form .fas.fa-paper-plane');
+                if (!paperPlaneIcon) {
+                    console.error('Ikon paper-plane tidak ditemukan!');
+                    return;
+                }
+                
+                // --- Interaksi Klik ---
+                paperPlaneIcon.addEventListener('click', function() {
+                    // Tambahkan kelas untuk animasi
+                    this.classList.add('clicked');
+                    // Hapus kelas setelah animasi selesai untuk bisa diulang
+                    setTimeout(() => {
+                        this.classList.remove('clicked');
+                    }, 500); // Harus sesuai durasi animasi (0.5s)
+                });
+                
+                // --- Interaksi Drag ---
+                let isDragging = false;
+                let currentX;
+                let currentY;
+                let initialX;
+                let initialY;
+                let xOffset = 0;
+                let yOffset = 0;
+                
+                // Fungsi saat mouse down (atau touch start)
+                function dragStart(e) {
+                    // Hentikan animasi klik jika sedang berjalan
+                    paperPlaneIcon.classList.remove('clicked');
+                    setTimeout(() => {
+                        paperPlaneIcon.classList.remove('clicked');
+                    }, 10);
+                    
+                    initialX = e.clientX - xOffset;
+                    initialY = e.clientY - yOffset;
+                    if (e.type === "touchstart") {
+                        initialX = e.touches[0].clientX - xOffset;
+                        initialY = e.touches[0].clientY - yOffset;
+                    }
+                    isDragging = true;
+                }
+                
+                // Fungsi saat mouse move (atau touch move)
+                function drag(e) {
+                    if (isDragging) {
+                        e.preventDefault(); // Mencegah scroll saat drag
+                        currentX = e.clientX - initialX;
+                        currentY = e.clientY - initialY;
+                        if (e.type === "touchmove") {
+                            currentX = e.touches[0].clientX - initialX;
+                            currentY = e.touches[0].clientY - initialY;
+                        }
+                        xOffset = currentX;
+                        yOffset = currentY;
+                        // Terapkan transformasi ke ikon
+                        setTranslate(currentX, currentY, paperPlaneIcon);
+                    }
+                }
+                
+                // Fungsi saat mouse up (atau touch end)
+                function dragEnd(e) {
+                    initialX = currentX;
+                    initialY = currentY;
+                    isDragging = false;
+                }
+                
+                // Fungsi untuk menerapkan posisi
+                function setTranslate(xPos, yPos, el) {
+                    el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
+                }
+                
+                // Tambahkan event listeners
+                paperPlaneIcon.addEventListener("mousedown", dragStart);
+                paperPlaneIcon.addEventListener("touchstart", dragStart);
+                document.addEventListener("mousemove", drag);
+                document.addEventListener("touchmove", drag);
+                document.addEventListener("mouseup", dragEnd);
+                document.addEventListener("touchend", dragEnd);
+            }
+            
+            // Panggil fungsi saat halaman selesai dimuat
+            setupPaperPlaneInteraction();
+
+// --- Fungsi untuk Interaksi Klik dan Drag pada Ikon Paper Plane ---
 function setupPaperPlaneInteraction() {
     const paperPlaneIcon = document.querySelector('.contact-form .fas.fa-paper-plane');
     if (!paperPlaneIcon) {
@@ -1205,10 +1290,15 @@ function setupPaperPlaneInteraction() {
     }
     
     // Simpan posisi awal
+    let originalX = 0;
+    let originalY = 0;
+    let isDragging = false;
+    let currentX;
+    let currentY;
+    let initialX;
+    let initialY;
     let xOffset = 0;
     let yOffset = 0;
-    let isDragging = false;
-    let initialX, initialY, currentX, currentY;
     
     // --- Interaksi Klik ---
     paperPlaneIcon.addEventListener('click', function(e) {
@@ -1219,8 +1309,8 @@ function setupPaperPlaneInteraction() {
         }
         
         // Cek apakah pesawat sedang di posisi asing (sudah di-drag)
-        if (Math.abs(xOffset) > 5 || Math.abs(yOffset) > 5) {
-            // Kembalikan ke posisi awal dengan animasi elastic
+        if (xOffset !== 0 || yOffset !== 0) {
+            // Kembalikan ke posisi awal dengan animasi
             returnToOriginalPosition();
         } else {
             // Jika di posisi awal, jalankan animasi bounce
@@ -1231,20 +1321,20 @@ function setupPaperPlaneInteraction() {
         }
     });
     
-    // Fungsi untuk mengembalikan ke posisi awal dengan animasi elastic
+    // Fungsi untuk mengembalikan ke posisi awal
     function returnToOriginalPosition() {
         paperPlaneIcon.classList.add('returning');
         
-        // Animasi kembali ke posisi awal dengan easing elastic
-        const start = performance.now();
+        // Animasi kembali ke posisi awal
         const duration = 600; // ms
+        const start = performance.now();
         
         function animateReturn(timestamp) {
             const elapsed = timestamp - start;
             const progress = Math.min(elapsed / duration, 1);
             
-            // Easing elastic untuk efek "pantul" saat kembali
-            const elasticEase = (t) => {
+            // Easing function untuk efek bounce saat kembali
+            const easeOutElastic = (t) => {
                 const c4 = (2 * Math.PI) / 3;
                 return t === 0 
                     ? 0 
@@ -1253,16 +1343,23 @@ function setupPaperPlaneInteraction() {
                     : Math.pow(2, -10 * t) * Math.sin((t * 10 - 0.75) * c4) + 1;
             };
             
-            const easedProgress = elasticEase(progress);
-            const newX = xOffset * (1 - easedProgress);
-            const newY = yOffset * (1 - easedProgress);
+            const easedProgress = easeOutElastic(progress);
             
+            // Hitung posisi interpolasi
+            const newX = originalX + (0 - originalX) * easedProgress;
+            const newY = originalY + (0 - originalY) * easedProgress;
+            
+            // Terapkan transformasi
             setTranslate(newX, newY, paperPlaneIcon);
+            
+            // Update offset
+            xOffset = newX;
+            yOffset = newY;
             
             if (progress < 1) {
                 requestAnimationFrame(animateReturn);
             } else {
-                // Reset ke posisi awal sempurna
+                // Reset ke posisi awal
                 xOffset = 0;
                 yOffset = 0;
                 setTranslate(0, 0, paperPlaneIcon);
@@ -1274,8 +1371,9 @@ function setupPaperPlaneInteraction() {
     }
     
     // --- Interaksi Drag ---
+    // Fungsi saat mouse down (atau touch start)
     function dragStart(e) {
-        // Hentikan animasi bounce jika sedang berjalan
+        // Hentikan animasi klik jika sedang berjalan
         paperPlaneIcon.classList.remove('clicked', 'returning');
         
         initialX = e.clientX - xOffset;
@@ -1285,31 +1383,37 @@ function setupPaperPlaneInteraction() {
             initialY = e.touches[0].clientY - yOffset;
         }
         isDragging = true;
-        e.preventDefault(); // Mencegah drag default browser
+        
+        // Simpan posisi saat mulai drag
+        originalX = xOffset;
+        originalY = yOffset;
     }
     
+    // Fungsi saat mouse move (atau touch move)
     function drag(e) {
-        if (!isDragging) return;
-        
-        e.preventDefault(); // Mencegah scroll saat drag
-        
-        currentX = e.clientX - initialX;
-        currentY = e.clientY - initialY;
-        if (e.type === "touchmove") {
-            currentX = e.touches[0].clientX - initialX;
-            currentY = e.touches[0].clientY - initialY;
+        if (isDragging) {
+            e.preventDefault(); // Mencegah scroll saat drag
+            currentX = e.clientX - initialX;
+            currentY = e.clientY - initialY;
+            if (e.type === "touchmove") {
+                currentX = e.touches[0].clientX - initialX;
+                currentY = e.touches[0].clientY - initialY;
+            }
+            xOffset = currentX;
+            yOffset = currentY;
+            // Terapkan transformasi ke ikon
+            setTranslate(currentX, currentY, paperPlaneIcon);
         }
-        
-        xOffset = currentX;
-        yOffset = currentY;
-        setTranslate(xOffset, yOffset, paperPlaneIcon);
     }
     
-    function dragEnd() {
+    // Fungsi saat mouse up (atau touch end)
+    function dragEnd(e) {
+        initialX = currentX;
+        initialY = currentY;
         isDragging = false;
     }
     
-    // Fungsi untuk menerapkan transformasi posisi
+    // Fungsi untuk menerapkan posisi
     function setTranslate(xPos, yPos, el) {
         el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
     }
@@ -1318,29 +1422,22 @@ function setupPaperPlaneInteraction() {
     paperPlaneIcon.addEventListener("mousedown", dragStart);
     paperPlaneIcon.addEventListener("touchstart", dragStart);
     document.addEventListener("mousemove", drag);
-    document.addEventListener("touchmove", drag, { passive: false });
+    document.addEventListener("touchmove", drag);
     document.addEventListener("mouseup", dragEnd);
     document.addEventListener("touchend", dragEnd);
     
-    // Tambahkan CSS untuk animasi return (jika belum ada)
-    if (!document.querySelector('#paper-plane-styles')) {
-        const style = document.createElement('style');
-        style.id = 'paper-plane-styles';
-        style.textContent = `
-            .contact-form i.fas.fa-paper-plane.returning {
-                transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            }
-            .contact-form i.fas.fa-paper-plane {
-                cursor: grab;
-                transition: transform 0.3s ease;
-            }
-            .contact-form i.fas.fa-paper-plane:active {
-                cursor: grabbing;
-            }
-        `;
-        document.head.appendChild(style);
-    }
+    // Tambahkan CSS untuk animasi return
+    const style = document.createElement('style');
+    style.textContent = `
+        .contact-form i.fas.fa-paper-plane.returning {
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+    `;
+    document.head.appendChild(style);
 }
+
+// Panggil fungsi saat halaman selesai dimuat
+window.addEventListener('load', setupPaperPlaneInteraction);
 
 // Panggil fungsi saat halaman selesai dimuat
 document.addEventListener('DOMContentLoaded', setupPaperPlaneInteraction);

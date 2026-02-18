@@ -816,6 +816,76 @@
                 grid-template-columns: 1fr 1fr; /* Dua kolom */
             }
         }
+    /* ===== Music Player Button ===== */
+.music-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background: rgba(108, 99, 255, 0.15);
+    border: 2px solid rgba(108, 99, 255, 0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-left: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.music-toggle:hover {
+    background: rgba(108, 99, 255, 0.3);
+    border-color: var(--primary);
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(108, 99, 255, 0.5);
+}
+
+.music-toggle:active {
+    transform: scale(0.95);
+}
+
+.music-toggle i {
+    color: var(--primary);
+    font-size: 1.2rem;
+    transition: var(--transition);
+}
+
+.music-toggle:hover i {
+    color: var(--accent);
+}
+
+/* Animasi saat musik bermain */
+.music-toggle.playing {
+    background: rgba(255, 101, 132, 0.2);
+    border-color: var(--accent);
+    animation: pulseMusic 2s infinite;
+}
+
+.music-toggle.playing i {
+    color: var(--accent);
+}
+
+@keyframes pulseMusic {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(255, 101, 132, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 15px rgba(255, 101, 132, 0);
+    }
+}
+
+/* Mobile styling */
+@media (max-width: 768px) {
+    .music-toggle {
+        width: 40px;
+        height: 40px;
+        margin-left: 10px;
+    }
+    
+    .music-toggle i {
+        font-size: 1rem;
+    }
+}
     </style>
 </head>
 <body>
@@ -828,6 +898,16 @@
         <div class="container">
             <nav>
                 <a href="#" class="logo">Naytaka</a>
+                <!-- Music Player Button -->
+            <button class="music-toggle" id="musicToggle" title="Play/Pause Music">
+                <i class="fas fa-play" id="musicIcon"></i>
+            </button>
+            
+            <!-- Audio Element (Path Lokal) -->
+            <audio id="backgroundMusic" loop>
+                <source src="ncs-background.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
                 <div class="nav-links">
                     <a href="#about">About</a>
                     <a href="#skills">Skills</a>
@@ -1039,6 +1119,16 @@
                     <a href="https://x.com/JusT_Idk4nymor4"><i class="fab fa-twitter"></i></a>
                     <a href="https://instagram.com/zeklith_091/"><i class="fab fa-instagram"></i></a>
                     <a href="https://facebook.com/profile.php?id=61583621862783"><i class="fab fa-facebook"></i></a>
+                  <!-- NCS Music Credit -->
+            <div class="music-credit" style="margin-top: 20px; padding: 15px; background: rgba(108, 99, 255, 0.1); border-radius: 10px; border: 1px solid rgba(108, 99, 255, 0.2);">
+                <p style="color: rgba(255, 255, 255, 0.6); font-size: 0.8rem; line-height: 1.6;">
+                    🎵 Background Music:<br>
+                    <strong>springs! - Magnetic [NCS Release]</strong><br>
+                    Music provided by <a href="https://ncs.io/" target="_blank" style="color: var(--primary); text-decoration: none;">NoCopyrightSounds</a><br>
+                    Free Download/Stream: <a href="http://ncs.io/Magnetic" target="_blank" style="color: var(--accent); text-decoration: none;">http://ncs.io/Magnetic</a><br>
+                    Watch: <a href="http://ncs.lnk.to/MagneticAT/youtube" target="_blank" style="color: var(--accent); text-decoration: none;">http://ncs.lnk.to/MagneticAT/youtube</a>
+                </p>
+            </div>
                 </div>
                 <p class="copyright">© 2025 Naytaka Eka Putra. All rights reserved.</p>
             </div>
@@ -1454,6 +1544,37 @@ document.addEventListener('DOMContentLoaded', setupPaperPlaneInteraction);
             document.querySelector('.copyright').innerHTML = `© ${new Date().getFullYear()} Naytaka Eka Putra. All rights reserved.`;
             
         });
+
+        // ===== 12. Music Player Control =====
+document.addEventListener('DOMContentLoaded', function() {
+    const musicToggle = document.getElementById('musicToggle');
+    const musicIcon = document.getElementById('musicIcon');
+    const backgroundMusic = document.getElementById('backgroundMusic');
+    let isPlaying = false;
+    
+    // Set volume (30%)
+    backgroundMusic.volume = 0.3;
+    
+    // Toggle play/pause
+    musicToggle.addEventListener('click', function() {
+        if (isPlaying) {
+            backgroundMusic.pause();
+            musicIcon.classList.remove('fa-pause');
+            musicIcon.classList.add('fa-play');
+            musicToggle.classList.remove('playing');
+            isPlaying = false;
+        } else {
+            backgroundMusic.play().then(() => {
+                musicIcon.classList.remove('fa-play');
+                musicIcon.classList.add('fa-pause');
+                musicToggle.classList.add('playing');
+                isPlaying = true;
+            }).catch(error => {
+                console.error('Error playing audio:', error);
+            });
+        }
+    });
+});
     </script>
     
     <!-- Particle Container -->

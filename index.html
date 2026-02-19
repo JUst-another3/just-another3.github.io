@@ -886,6 +886,59 @@
         font-size: 1rem;
     }
 }
+
+        /* Music Credit Styling - Diperbaiki */
+.music-credit {
+    max-width: 400px; /* Lebar maksimal yang lebih pas */
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(108, 99, 255, 0.1);
+    border-radius: 15px;
+    border: 1px solid rgba(108, 99, 255, 0.2);
+    text-align: center;
+    word-wrap: break-word; /* Mencegah teks overflow */
+    overflow-wrap: break-word;
+}
+
+.music-credit p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+    line-height: 1.8; /* Jarak antar baris lebih lega */
+    margin: 0;
+}
+
+.music-credit strong {
+    color: var(--light);
+    display: block; /* Judul lagu di baris sendiri */
+    margin: 10px 0;
+    font-size: 0.95rem;
+}
+
+.music-credit a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: var(--transition);
+    word-break: break-all; /* Memecah URL panjang */
+}
+
+.music-credit a:hover {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+/* Mobile responsive untuk kredit musik */
+@media (max-width: 768px) {
+    .music-credit {
+        max-width: 90%; /* Lebih lebar di mobile */
+        margin: 20px auto;
+        padding: 15px;
+    }
+    
+    .music-credit p {
+        font-size: 0.8rem;
+        line-height: 2; /* Lebih lega di mobile */
+    }
+}
     </style>
 </head>
 <body>
@@ -1119,17 +1172,15 @@
                     <a href="https://x.com/JusT_Idk4nymor4"><i class="fab fa-twitter"></i></a>
                     <a href="https://instagram.com/zeklith_091/"><i class="fab fa-instagram"></i></a>
                     <a href="https://facebook.com/profile.php?id=61583621862783"><i class="fab fa-facebook"></i></a>
+                </div>
                   <!-- NCS Music Credit -->
             <div class="music-credit" style="margin-top: 20px; padding: 15px; background: rgba(108, 99, 255, 0.1); border-radius: 10px; border: 1px solid rgba(108, 99, 255, 0.2);">
                 <p style="color: rgba(255, 255, 255, 0.6); font-size: 0.8rem; line-height: 1.6;">
                     🎵 Background Music:<br>
                     <strong>springs! - Magnetic [NCS Release]</strong><br>
                     Music provided by <a href="https://ncs.io/" target="_blank" style="color: var(--primary); text-decoration: none;">NoCopyrightSounds</a><br>
-                    Free Download/Stream: <a href="http://ncs.io/Magnetic" target="_blank" style="color: var(--accent); text-decoration: none;">http://ncs.io/Magnetic</a><br>
-                    Watch: <a href="http://ncs.lnk.to/MagneticAT/youtube" target="_blank" style="color: var(--accent); text-decoration: none;">http://ncs.lnk.to/MagneticAT/youtube</a>
                 </p>
             </div>
-                </div>
                 <p class="copyright">© 2025 Naytaka Eka Putra. All rights reserved.</p>
             </div>
         </div>

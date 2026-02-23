@@ -653,6 +653,25 @@
             border-top: 1px solid rgba(108, 99, 255, 0.3); /* Border atas transparan */
         }
 
+        
+.back-to-top:hover i {
+    transform: translateY(-3px);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .back-to-top i {
+        font-size: 1rem;
+    }
+}
+        
         /* ===== ANIMASI KUSTOM ===== */
         /* Animasi berdenyut untuk logo */
         @keyframes pulse {
@@ -979,23 +998,6 @@
     transition: transform 0.3s ease;
 }
 
-.back-to-top:hover i {
-    transform: translateY(-3px);
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-    .back-to-top {
-        bottom: 20px;
-        right: 20px;
-        width: 45px;
-        height: 45px;
-    }
-    
-    .back-to-top i {
-        font-size: 1rem;
-    }
-}
     </style>
 </head>
 <body>
@@ -1683,66 +1685,25 @@ document.addEventListener('DOMContentLoaded', function() {
             }).catch(error => {
                 console.error('Error playing audio:', error);
             });
-        }
-    });
+        // Back to Top Button Functionality
+const backToTopButton = document.getElementById('backToTop');
+
+// Show/hide button based on scroll position
+window.addEventListener('scroll', function() {
+    if (window.scrollY > 500) {
+        backToTopButton.classList.add('show');
+    } else {
+        backToTopButton.classList.remove('show');
+    }
 });
 
-        /* Back to Top Button Styling */
-.back-to-top {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(45deg, var(--primary), var(--secondary));
-    color: white;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 999;
-    opacity: 0;
-    visibility: hidden;
-    transform: scale(0);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 10px 30px rgba(108, 99, 255, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.back-to-top.show {
-    opacity: 1;
-    visibility: visible;
-    transform: scale(1);
-}
-
-.back-to-top:hover {
-    transform: scale(1.1) translateY(-3px);
-    box-shadow: 0 15px 40px rgba(108, 99, 255, 0.6);
-}
-
-.back-to-top i {
-    font-size: 1.2rem;
-    transition: transform 0.3s ease;
-}
-
-.back-to-top:hover i {
-    transform: translateY(-3px);
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-    .back-to-top {
-        bottom: 20px;
-        right: 20px;
-        width: 45px;
-        height: 45px;
-    }
-    
-    .back-to-top i {
-        font-size: 1rem;
-    }
-}
+// Scroll to top when clicked
+backToTopButton.addEventListener('click', function() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
     </script>
     
     <!-- Particle Container -->

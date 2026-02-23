@@ -939,6 +939,63 @@
         line-height: 2; /* Lebih lega di mobile */
     }
 }
+
+        /* Back to Top Button Styling */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 30px rgba(108, 99, 255, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+.back-to-top:hover {
+    transform: scale(1.1) translateY(-3px);
+    box-shadow: 0 15px 40px rgba(108, 99, 255, 0.6);
+}
+
+.back-to-top i {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.back-to-top:hover i {
+    transform: translateY(-3px);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .back-to-top i {
+        font-size: 1rem;
+    }
+}
     </style>
 </head>
 <body>
@@ -1626,9 +1683,71 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+        /* Back to Top Button Styling */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 30px rgba(108, 99, 255, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+.back-to-top:hover {
+    transform: scale(1.1) translateY(-3px);
+    box-shadow: 0 15px 40px rgba(108, 99, 255, 0.6);
+}
+
+.back-to-top i {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.back-to-top:hover i {
+    transform: translateY(-3px);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .back-to-top i {
+        font-size: 1rem;
+    }
+}
     </script>
     
     <!-- Particle Container -->
     <div id="particles-js"></div>
+
+    <!-- Back to Top Button -->
+<button id="backToTop" class="back-to-top" title="Back to Top">
+    <i class="fas fa-arrow-up"></i>
+</button>
 </body>
 </html>

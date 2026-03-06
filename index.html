@@ -1245,444 +1245,258 @@
     </footer>
     
     <!-- JavaScript -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        // ============================================
-        // ANIMASI SCROLL SECTION-BY-SECTION
-        // ============================================
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+    // ============================================
+    // SEMUA JAVASCRIPT DIPANGGIL SETELAH DOM LOADED
+    // ============================================
+    
+    document.addEventListener('DOMContentLoaded', function() {
         
-        document.addEventListener('DOMContentLoaded', function() {
-            
-            // --- 1. Hero Section - Muncul Otomatis Saat Halaman Dimuat ---
-            const heroSection = document.querySelector('.hero');
-            if (heroSection) {
-                setTimeout(() => {
-                    heroSection.style.opacity = '1';
-                    heroSection.style.transform = 'translateY(0)';
-                }, 100);
-            }
-            
-            // --- 2. Setup Intersection Observer untuk Section Lainnya ---
-            const sectionObserverOptions = {
-                threshold: 0.1, // Section terlihat 10% sudah trigger animasi
-                rootMargin: '0px 0px -50px 0px' // Trigger sedikit sebelum section fully visible
-            };
-            
-            const sectionObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        // Tambahkan class 'visible' untuk trigger animasi
-                        entry.target.classList.add('visible');
-                        
-                        // Jika section adalah Skills, animasikan skill cards berantai
-                        if (entry.target.id === 'skills') {
-                            animateSkillCards();
-                        }
-                        
-                        // Jika section adalah Experience, animasikan timeline items berantai
-                        if (entry.target.id === 'experience') {
-                            animateTimelineItems();
-                        }
-                        
-                        // Hentikan observasi setelah animasi dimulai
-                        sectionObserver.unobserve(entry.target);
-                    }
-                });
-            }, sectionObserverOptions);
-            
-            // --- 3. Apply Observer ke Setiap Section ---
-            const sectionsToAnimate = [
-                { element: document.getElementById('about'), delay: 0 },
-                { element: document.getElementById('skills'), delay: 0 },
-                { element: document.getElementById('experience'), delay: 0 },
-                { element: document.getElementById('contact'), delay: 0 }
-            ];
-            
-            sectionsToAnimate.forEach((section, index) => {
-                if (section.element) {
-                    // Tambahkan observer dengan delay berdasarkan urutan
+        // --- 1. Animasi Tombol "Let's Connect" ---
+        const ctaButton = document.querySelector('.cta-button');
+        const header = document.querySelector('header');
+        
+        if (ctaButton) {
+            ctaButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    header.classList.add('scrolled');
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                    
                     setTimeout(() => {
-                        sectionObserver.observe(section.element);
-                    }, section.delay);
+                        header.classList.remove('scrolled');
+                    }, 2000);
                 }
             });
-            
-            // --- 4. Fungsi untuk Animasi Skill Cards Berantai ---
-            function animateSkillCards() {
-                const skillCards = document.querySelectorAll('.skill-card');
-                const skillBars = document.querySelectorAll('.skill-progress');
-                
-                skillCards.forEach((card, index) => {
-                    setTimeout(() => {
-                        card.classList.add('visible');
-                        
-                        // Animate progress bars
-                        const bar = skillBars[index];
-                        if (bar) {
-                            const level = bar.getAttribute('data-level');
-                            bar.style.width = level;
-                        }
-                    }, 200 * index); // Delay 200ms per card
-                });
+        }
+        
+        // --- 2. Header Scroll Effect ---
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
             }
-            
-            // --- 5. Fungsi untuk Animasi Timeline Items Berantai ---
-            function animateTimelineItems() {
-                const timelineItems = document.querySelectorAll('.timeline-item');
-                timelineItems.forEach((item, index) => {
-                    setTimeout(() => {
-                        item.classList.add('visible');
-                    }, 300 * index); // Delay 300ms per item
+        });
+        
+        // --- 3. Smooth Scrolling untuk Navigation ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // --- 4. Mobile Menu Toggle ---
+        const mobileToggle = document.querySelector('.mobile-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (mobileToggle) {
+            mobileToggle.addEventListener('click', function() {
+                if (navLinks) {
+                    navLinks.classList.toggle('show');
+                }
+            });
+        }
+        
+        // Close mobile menu when clicking a link
+        if (navLinks) {
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.classList.remove('show');
                 });
-            }
-            
-            // --- 6. Smooth Scroll untuk Tombol "Let's Connect" ---
-            const ctaButton = document.querySelector('.cta-button');
-            if (ctaButton) {
-                ctaButton.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
+            });
+        }
+        
+        // --- 5. Intersection Observer untuk Animasi Scroll ---
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate__animated', 'animate__fadeInUp');
                     
-                    if (targetElement) {
-                        // Scroll dengan smooth behavior
-                        const headerHeight = document.querySelector('header').offsetHeight;
-                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
-                        
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
+                    if (entry.target.classList.contains('timeline')) {
+                        const timelineItems = entry.target.querySelectorAll('.timeline-content');
+                        timelineItems.forEach((item, index) => {
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                                item.style.transform = 'translateX(0)';
+                            }, 200 * index);
                         });
-                        
-                        // Highlight header saat scroll
-                        const header = document.querySelector('header');
-                        header.classList.add('scrolled');
-                        setTimeout(() => {
-                            header.classList.remove('scrolled');
-                        }, 2000);
                     }
-                });
-            }
-            
-            // --- 7. Fungsi untuk Interaksi Klik dan Drag pada Ikon Paper Plane ---
- function setupPaperPlaneInteraction() {
-                const paperPlaneIcon = document.querySelector('.contact-form .fas.fa-paper-plane');
-                if (!paperPlaneIcon) {
-                    console.error('Ikon paper-plane tidak ditemukan!');
-                    return;
-                }
-                
-                // --- Interaksi Klik ---
-                paperPlaneIcon.addEventListener('click', function() {
-                    // Tambahkan kelas untuk animasi
-                    this.classList.add('clicked');
-                    // Hapus kelas setelah animasi selesai untuk bisa diulang
-                    setTimeout(() => {
-                        this.classList.remove('clicked');
-                    }, 500); // Harus sesuai durasi animasi (0.5s)
-                });
-                
-                // --- Interaksi Drag ---
-                let isDragging = false;
-                let currentX;
-                let currentY;
-                let initialX;
-                let initialY;
-                let xOffset = 0;
-                let yOffset = 0;
-                
-                // Fungsi saat mouse down (atau touch start)
-                function dragStart(e) {
-                    // Hentikan animasi klik jika sedang berjalan
-                    paperPlaneIcon.classList.remove('clicked');
-                    setTimeout(() => {
-                        paperPlaneIcon.classList.remove('clicked');
-                    }, 10);
                     
-                    initialX = e.clientX - xOffset;
-                    initialY = e.clientY - yOffset;
-                    if (e.type === "touchstart") {
-                        initialX = e.touches[0].clientX - xOffset;
-                        initialY = e.touches[0].clientY - yOffset;
-                    }
-                    isDragging = true;
+                    observer.unobserve(entry.target);
                 }
-                
-                // Fungsi saat mouse move (atau touch move)
-                function drag(e) {
-                    if (isDragging) {
-                        e.preventDefault(); // Mencegah scroll saat drag
-                        currentX = e.clientX - initialX;
-                        currentY = e.clientY - initialY;
-                        if (e.type === "touchmove") {
-                            currentX = e.touches[0].clientX - initialX;
-                            currentY = e.touches[0].clientY - initialY;
-                        }
-                        xOffset = currentX;
-                        yOffset = currentY;
-                        // Terapkan transformasi ke ikon
-                        setTranslate(currentX, currentY, paperPlaneIcon);
-                    }
+            });
+        }, observerOptions);
+        
+        // Apply observer to elements
+        document.querySelectorAll('.section-title, .about-text, .personal-info, .skills-container, .timeline, .contact-info').forEach(element => {
+            observer.observe(element);
+        });
+        
+        // --- 6. Animate Skill Bars ---
+        function animateSkillBars() {
+            const skillBars = document.querySelectorAll('.skill-progress');
+            skillBars.forEach(bar => {
+                const level = bar.getAttribute('data-level');
+                if (level) {
+                    bar.style.width = level;
                 }
-                
-                // Fungsi saat mouse up (atau touch end)
-                function dragEnd(e) {
-                    initialX = currentX;
-                    initialY = currentY;
-                    isDragging = false;
-                }
-                
-                // Fungsi untuk menerapkan posisi
-                function setTranslate(xPos, yPos, el) {
-                    el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
-                }
-                
-                // Tambahkan event listeners
-                paperPlaneIcon.addEventListener("mousedown", dragStart);
-                paperPlaneIcon.addEventListener("touchstart", dragStart);
-                document.addEventListener("mousemove", drag);
-                document.addEventListener("touchmove", drag);
-                document.addEventListener("mouseup", dragEnd);
-                document.addEventListener("touchend", dragEnd);
-            }
+            });
+        }
+        
+        // --- 7. Update Year in Copyright ---
+        const copyright = document.querySelector('.copyright');
+        if (copyright) {
+            copyright.innerHTML = `© ${new Date().getFullYear()} Naytaka Eka Putra. All rights reserved.`;
+        }
+        
+        // --- 8. Initial Animations After Page Load ---
+        setTimeout(() => {
+            document.querySelectorAll('.skill-card').forEach(card => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            });
             
-            // Panggil fungsi saat halaman selesai dimuat
-            setupPaperPlaneInteraction();
-
-// --- Fungsi untuk Interaksi Klik dan Drag pada Ikon Paper Plane ---
-function setupPaperPlaneInteraction() {
-    const paperPlaneIcon = document.querySelector('.contact-form .fas.fa-paper-plane');
-    if (!paperPlaneIcon) {
-        console.error('Ikon paper-plane tidak ditemukan!');
-        return;
-    }
+            if (window.pageYOffset === 0) {
+                const heroH1 = document.querySelector('.hero h1');
+                const heroP = document.querySelector('.hero p');
+                const ctaBtn = document.querySelector('.cta-button');
+                const heroImage = document.querySelector('.hero-image');
+                
+                if (heroH1) heroH1.style.animation = 'fadeInUp 1s ease-out 0.5s forwards';
+                if (heroP) heroP.style.animation = 'fadeInUp 1s ease-out 1s forwards';
+                if (ctaBtn) ctaBtn.style.animation = 'fadeInUp 1s ease-out 1.5s forwards';
+                if (heroImage) heroImage.style.animation = 'fadeInRight 1s ease-out 2s forwards';
+            }
+        }, 100);
+        
+    }); // ✅ END OF DOMContentLoaded
     
-    // Simpan posisi awal
-    let originalX = 0;
-    let originalY = 0;
-    let isDragging = false;
-    let currentX;
-    let currentY;
-    let initialX;
-    let initialY;
-    let xOffset = 0;
-    let yOffset = 0;
-    
-    // --- Interaksi Klik ---
-    paperPlaneIcon.addEventListener('click', function(e) {
-        // Cegah event bubbling jika sedang drag
-        if (isDragging) {
-            e.stopPropagation();
+    // --- 9. Paper Plane Interaction (Drag & Click) ---
+    function setupPaperPlaneInteraction() {
+        const paperPlaneIcon = document.querySelector('.contact-form .fas.fa-paper-plane');
+        if (!paperPlaneIcon) {
+            console.error('Ikon paper-plane tidak ditemukan!');
             return;
         }
         
-        // Cek apakah pesawat sedang di posisi asing (sudah di-drag)
-        if (xOffset !== 0 || yOffset !== 0) {
-            // Kembalikan ke posisi awal dengan animasi
-            returnToOriginalPosition();
-        } else {
-            // Jika di posisi awal, jalankan animasi bounce
+        // Click Interaction
+        paperPlaneIcon.addEventListener('click', function() {
             this.classList.add('clicked');
             setTimeout(() => {
                 this.classList.remove('clicked');
             }, 500);
-        }
-    });
-    
-    // Fungsi untuk mengembalikan ke posisi awal
-    function returnToOriginalPosition() {
-        paperPlaneIcon.classList.add('returning');
-        
-        // Animasi kembali ke posisi awal
-        const duration = 600; // ms
-        const start = performance.now();
-        
-        function animateReturn(timestamp) {
-            const elapsed = timestamp - start;
-            const progress = Math.min(elapsed / duration, 1);
-            
-            // Easing function untuk efek bounce saat kembali
-            const easeOutElastic = (t) => {
-                const c4 = (2 * Math.PI) / 3;
-                return t === 0 
-                    ? 0 
-                    : t === 1 
-                    ? 1 
-                    : Math.pow(2, -10 * t) * Math.sin((t * 10 - 0.75) * c4) + 1;
-            };
-            
-            const easedProgress = easeOutElastic(progress);
-            
-            // Hitung posisi interpolasi
-            const newX = originalX + (0 - originalX) * easedProgress;
-            const newY = originalY + (0 - originalY) * easedProgress;
-            
-            // Terapkan transformasi
-            setTranslate(newX, newY, paperPlaneIcon);
-            
-            // Update offset
-            xOffset = newX;
-            yOffset = newY;
-            
-            if (progress < 1) {
-                requestAnimationFrame(animateReturn);
-            } else {
-                // Reset ke posisi awal
-                xOffset = 0;
-                yOffset = 0;
-                setTranslate(0, 0, paperPlaneIcon);
-                paperPlaneIcon.classList.remove('returning');
-            }
-        }
-        
-        requestAnimationFrame(animateReturn);
-    }
-    
-    // --- Interaksi Drag ---
-    // Fungsi saat mouse down (atau touch start)
-    function dragStart(e) {
-        // Hentikan animasi klik jika sedang berjalan
-        paperPlaneIcon.classList.remove('clicked', 'returning');
-        
-        initialX = e.clientX - xOffset;
-        initialY = e.clientY - yOffset;
-        if (e.type === "touchstart") {
-            initialX = e.touches[0].clientX - xOffset;
-            initialY = e.touches[0].clientY - yOffset;
-        }
-        isDragging = true;
-        
-        // Simpan posisi saat mulai drag
-        originalX = xOffset;
-        originalY = yOffset;
-    }
-    
-    // Fungsi saat mouse move (atau touch move)
-    function drag(e) {
-        if (isDragging) {
-            e.preventDefault(); // Mencegah scroll saat drag
-            currentX = e.clientX - initialX;
-            currentY = e.clientY - initialY;
-            if (e.type === "touchmove") {
-                currentX = e.touches[0].clientX - initialX;
-                currentY = e.touches[0].clientY - initialY;
-            }
-            xOffset = currentX;
-            yOffset = currentY;
-            // Terapkan transformasi ke ikon
-            setTranslate(currentX, currentY, paperPlaneIcon);
-        }
-    }
-    
-    // Fungsi saat mouse up (atau touch end)
-    function dragEnd(e) {
-        initialX = currentX;
-        initialY = currentY;
-        isDragging = false;
-    }
-    
-    // Fungsi untuk menerapkan posisi
-    function setTranslate(xPos, yPos, el) {
-        el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
-    }
-    
-    // Tambahkan event listeners
-    paperPlaneIcon.addEventListener("mousedown", dragStart);
-    paperPlaneIcon.addEventListener("touchstart", dragStart);
-    document.addEventListener("mousemove", drag);
-    document.addEventListener("touchmove", drag);
-    document.addEventListener("mouseup", dragEnd);
-    document.addEventListener("touchend", dragEnd);
-    
-    // Tambahkan CSS untuk animasi return
-    const style = document.createElement('style');
-    style.textContent = `
-        .contact-form i.fas.fa-paper-plane.returning {
-            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-    `;
-    document.head.appendChild(style);
-}
-
-// Panggil fungsi saat halaman selesai dimuat
-window.addEventListener('load', setupPaperPlaneInteraction);
-
-// Panggil fungsi saat halaman selesai dimuat
-document.addEventListener('DOMContentLoaded', setupPaperPlaneInteraction);
-            
-            // --- 8. Header Scroll Effect ---
-            window.addEventListener('scroll', function() {
-                const header = document.getElementById('header');
-                if (window.scrollY > 100) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
-            
-            // --- 9. Smooth Scrolling untuk Navigation Links ---
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                if (anchor !== ctaButton) { // Skip CTA button yang sudah ditangani
-                    anchor.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        const target = document.querySelector(this.getAttribute('href'));
-                        if (target) {
-                            window.scrollTo({
-                                top: target.offsetTop - 80,
-                                behavior: 'smooth'
-                            });
-                        }
-                    });
-                }
-            });
-            
-            // --- 10. Mobile Menu Toggle ---
-            document.querySelector('.mobile-toggle')?.addEventListener('click', function() {
-                const navLinks = document.querySelector('.nav-links');
-                navLinks.classList.toggle('show');
-            });
-            
-            // Close mobile menu when clicking a link
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', function() {
-                    document.querySelector('.nav-links').classList.remove('show');
-                });
-            });
-            
-            // --- 11. Update Year in Copyright ---
-            document.querySelector('.copyright').innerHTML = `© ${new Date().getFullYear()} Naytaka Eka Putra. All rights reserved.`;
-            
         });
-
-        // ===== 12. Music Player Control =====
-document.addEventListener('DOMContentLoaded', function() {
-    const musicToggle = document.getElementById('musicToggle');
-    const musicIcon = document.getElementById('musicIcon');
-    const backgroundMusic = document.getElementById('backgroundMusic');
-    let isPlaying = false;
+        
+        // Drag Interaction
+        let isDragging = false;
+        let currentX, currentY, initialX, initialY, xOffset = 0, yOffset = 0;
+        
+        function dragStart(e) {
+            paperPlaneIcon.classList.remove('clicked');
+            initialX = e.clientX - xOffset;
+            initialY = e.clientY - yOffset;
+            if (e.type === "touchstart") {
+                initialX = e.touches[0].clientX - xOffset;
+                initialY = e.touches[0].clientY - yOffset;
+            }
+            isDragging = true;
+        }
+        
+        function drag(e) {
+            if (isDragging) {
+                e.preventDefault();
+                currentX = e.clientX - initialX;
+                currentY = e.clientY - initialY;
+                if (e.type === "touchmove") {
+                    currentX = e.touches[0].clientX - initialX;
+                    currentY = e.touches[0].clientY - initialY;
+                }
+                xOffset = currentX;
+                yOffset = currentY;
+                setTranslate(currentX, currentY, paperPlaneIcon);
+            }
+        }
+        
+        function dragEnd() {
+            isDragging = false;
+        }
+        
+        function setTranslate(xPos, yPos, el) {
+            el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
+        }
+        
+        paperPlaneIcon.addEventListener("mousedown", dragStart);
+        paperPlaneIcon.addEventListener("touchstart", dragStart);
+        document.addEventListener("mousemove", drag);
+        document.addEventListener("touchmove", drag);
+        document.addEventListener("mouseup", dragEnd);
+        document.addEventListener("touchend", dragEnd);
+    }
     
-    // Set volume (30%)
-    backgroundMusic.volume = 0.3;
+    // Call paper plane interaction after page load
+    window.addEventListener('load', setupPaperPlaneInteraction);
     
-    // Toggle play/pause
-    musicToggle.addEventListener('click', function() {
-        if (isPlaying) {
-            backgroundMusic.pause();
-            musicIcon.classList.remove('fa-pause');
-            musicIcon.classList.add('fa-play');
-            musicToggle.classList.remove('playing');
-            isPlaying = false;
-        } else {
-            backgroundMusic.play().then(() => {
-                musicIcon.classList.remove('fa-play');
-                musicIcon.classList.add('fa-pause');
-                musicToggle.classList.add('playing');
-                isPlaying = true;
-            }).catch(error => {
-                console.error('Error playing audio:', error);
-            });
-    </script>
-    
+    // --- 10. Initialize Particles.js ---
+    if (typeof particlesJS !== 'undefined') {
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#6C63FF" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#6C63FF",
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out"
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "grab" },
+                    onclick: { enable: true, mode: "push" },
+                    resize: true
+                }
+            },
+            retina_detect: true
+        });
+    }
+</script>
     <!-- Particle Container -->
     <div id="particles-js"></div>
 </body>

@@ -1243,10 +1243,6 @@
             </div>
         </div>
     </footer>
-      <!-- Back to Top Button -->
-<button id="backToTop" class="back-to-top" title="Back to Top">
-    <i class="fas fa-arrow-up"></i>
-</button>
     
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -1685,25 +1681,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }).catch(error => {
                 console.error('Error playing audio:', error);
             });
-        // Back to Top Button Functionality
-const backToTopButton = document.getElementById('backToTop');
-
-// Show/hide button based on scroll position
-window.addEventListener('scroll', function() {
-    if (window.scrollY > 500) {
-        backToTopButton.classList.add('show');
-    } else {
-        backToTopButton.classList.remove('show');
-    }
-});
-
-// Scroll to top when clicked
-backToTopButton.addEventListener('click', function() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-});
     </script>
     
     <!-- Particle Container -->

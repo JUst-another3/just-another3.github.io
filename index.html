@@ -810,6 +810,130 @@
                 grid-template-columns: 1fr 1fr; /* Dua kolom */
             }
         }
+
+         /* ===== Music Player Button ===== */
+.music-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background: rgba(108, 99, 255, 0.15);
+    border: 2px solid rgba(108, 99, 255, 0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-left: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.music-toggle:hover {
+    background: rgba(108, 99, 255, 0.3);
+    border-color: var(--primary);
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(108, 99, 255, 0.5);
+}
+
+.music-toggle:active {
+    transform: scale(0.95);
+}
+
+.music-toggle i {
+    color: var(--primary);
+    font-size: 1.2rem;
+    transition: var(--transition);
+}
+
+.music-toggle:hover i {
+    color: var(--accent);
+}
+
+/* Animasi saat musik bermain */
+.music-toggle.playing {
+    background: rgba(255, 101, 132, 0.2);
+    border-color: var(--accent);
+    animation: pulseMusic 2s infinite;
+}
+
+.music-toggle.playing i {
+    color: var(--accent);
+}
+
+@keyframes pulseMusic {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(255, 101, 132, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 15px rgba(255, 101, 132, 0);
+    }
+}
+
+/* Mobile styling */
+@media (max-width: 768px) {
+    .music-toggle {
+        width: 40px;
+        height: 40px;
+        margin-left: 10px;
+    }
+    
+    .music-toggle i {
+        font-size: 1rem;
+    }
+}
+        
+        /* Music Credit Styling - Diperbaiki */
+.music-credit {
+    max-width: 400px; /* Lebar maksimal yang lebih pas */
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(108, 99, 255, 0.1);
+    border-radius: 15px;
+    border: 1px solid rgba(108, 99, 255, 0.2);
+    text-align: center;
+    word-wrap: break-word; /* Mencegah teks overflow */
+    overflow-wrap: break-word;
+}
+
+.music-credit p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+    line-height: 1.8; /* Jarak antar baris lebih lega */
+    margin: 0;
+}
+
+.music-credit strong {
+    color: var(--light);
+    display: block; /* Judul lagu di baris sendiri */
+    margin: 10px 0;
+    font-size: 0.95rem;
+}
+
+.music-credit a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: var(--transition);
+    word-break: break-all; /* Memecah URL panjang */
+}
+
+.music-credit a:hover {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+/* Mobile responsive untuk kredit musik */
+@media (max-width: 768px) {
+    .music-credit {
+        max-width: 90%; /* Lebih lebar di mobile */
+        margin: 20px auto;
+        padding: 15px;
+    }
+    
+    .music-credit p {
+        font-size: 0.8rem;
+        line-height: 2; /* Lebih lega di mobile */
+    }
+}
     </style>
 </head>
 <body>
@@ -845,7 +969,7 @@
             </div>
             <div class="hero-image">
                 <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 50%;">
-                    <img src="nyan-cat-cat.gif" alt="Nyan Cat" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="nyan-cat.gif" alt="Nyan Cat" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
             </div>
         </div>
@@ -901,27 +1025,27 @@
             <div class="skills-container">
                 <div class="skill-card">
                     <div class="skill-icon">
-                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i> </div>
                     <h3>Mobile Gaming (Honor of Kings)</h3>
                     </div>
                 <div class="skill-card">
                     <div class="skill-icon">
-                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i> </div>
                     <h3>Basic Tool Repair & Maintenance</h3>
                     </div>
                 <div class="skill-card">
                     <div class="skill-icon">
-                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i> </div>
                     <h3>Sustainability & Cardboard Recycling</h3>
                     </div>
                 <div class="skill-card">
                     <div class="skill-icon">
-                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i> </div>
                     <h3>Microsoft Office Suite</h3>
                     </div>
                 <div class="skill-card">
                     <div class="skill-icon">
-                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i> </div>
                     <h3>Canva Design & Content Creation</h3>
                     </div>
             </div>
@@ -1282,6 +1406,37 @@
             document.querySelector('.copyright').innerHTML = `© ${new Date().getFullYear()} Naytaka Eka Putra. All rights reserved.`;
             
         });
+
+        // ===== 12. Music Player Control =====
+document.addEventListener('DOMContentLoaded', function() {
+    const musicToggle = document.getElementById('musicToggle');
+    const musicIcon = document.getElementById('musicIcon');
+    const backgroundMusic = document.getElementById('backgroundMusic');
+    let isPlaying = false;
+    
+    // Set volume (30%)
+    backgroundMusic.volume = 0.3;
+    
+    // Toggle play/pause
+    musicToggle.addEventListener('click', function() {
+        if (isPlaying) {
+            backgroundMusic.pause();
+            musicIcon.classList.remove('fa-pause');
+            musicIcon.classList.add('fa-play');
+            musicToggle.classList.remove('playing');
+            isPlaying = false;
+        } else {
+            backgroundMusic.play().then(() => {
+                musicIcon.classList.remove('fa-play');
+                musicIcon.classList.add('fa-pause');
+                musicToggle.classList.add('playing');
+                isPlaying = true;
+            }).catch(error => {
+                console.error('Error playing audio:', error);
+            });
+        }
+    });
+});
     </script>
     
     <!-- Particle Container -->

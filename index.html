@@ -946,6 +946,16 @@
         <div class="container">
             <nav>
                 <a href="#" class="logo">Naytaka</a>
+                <!-- Music Player Button -->
+            <button class="music-toggle" id="musicToggle" title="Play/Pause Music">
+                <i class="fas fa-play" id="musicIcon"></i>
+            </button>
+            
+            <!-- Audio Element (Path Lokal) -->
+            <audio id="backgroundMusic" loop>
+                <source src="ncs-background.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
                 <div class="nav-links">
                     <a href="#about">About</a>
                     <a href="#skills">Skills</a>
